@@ -21,6 +21,8 @@
 		8AB775B819B98FDD00FC9A0A /* spready.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AB775B719B98FDD00FC9A0A /* spready.png */; };
 		8AFCD10519BF2DD200A275EC /* notes.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AFCD10419BF2DD200A275EC /* notes.png */; };
 		8AFCD10619BF36A500A275EC /* chat_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AFCD10819BF36A500A275EC /* chat_icon.png */; };
+		8AFCD10F19C07B8A00A275EC /* ViewControllerNotes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFCD10D19C07B8A00A275EC /* ViewControllerNotes.m */; };
+		8AFCD11019C07B8A00A275EC /* ViewControllerNotes.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFCD10E19C07B8A00A275EC /* ViewControllerNotes.xib */; };
 		ACDBF5FF190EEFF8001FF4ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDBF5FE190EEFF8001FF4ED /* UIKit.framework */; };
 		ACDBF601190EEFF8001FF4ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDBF600190EEFF8001FF4ED /* Foundation.framework */; };
 		ACDBF603190EEFF8001FF4ED /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDBF602190EEFF8001FF4ED /* CoreGraphics.framework */; };
@@ -76,6 +78,9 @@
 		8AB775B719B98FDD00FC9A0A /* spready.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spready.png; sourceTree = "<group>"; };
 		8AFCD10419BF2DD200A275EC /* notes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notes.png; sourceTree = "<group>"; };
 		8AFCD10719BF36A500A275EC /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/chat_icon.png; sourceTree = "<group>"; };
+		8AFCD10C19C07B8A00A275EC /* ViewControllerNotes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerNotes.h; sourceTree = "<group>"; };
+		8AFCD10D19C07B8A00A275EC /* ViewControllerNotes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerNotes.m; sourceTree = "<group>"; };
+		8AFCD10E19C07B8A00A275EC /* ViewControllerNotes.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewControllerNotes.xib; sourceTree = "<group>"; };
 		ACDBF5FB190EEFF8001FF4ED /* bw3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bw3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDBF5FE190EEFF8001FF4ED /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ACDBF600190EEFF8001FF4ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -153,6 +158,16 @@
 			name = messages;
 			sourceTree = "<group>";
 		};
+		8AFCD10B19C07B4C00A275EC /* notes */ = {
+			isa = PBXGroup;
+			children = (
+				8AFCD10C19C07B8A00A275EC /* ViewControllerNotes.h */,
+				8AFCD10D19C07B8A00A275EC /* ViewControllerNotes.m */,
+				8AFCD10E19C07B8A00A275EC /* ViewControllerNotes.xib */,
+			);
+			name = notes;
+			sourceTree = "<group>";
+		};
 		ACDBF5F2190EEFF8001FF4ED = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +200,7 @@
 		ACDBF604190EEFF8001FF4ED /* bw3 */ = {
 			isa = PBXGroup;
 			children = (
+				8AFCD10B19C07B4C00A275EC /* notes */,
 				8A54624719815011007BAEDA /* messages */,
 				ACDBF690193DBFF0001FF4ED /* Boardwalk */,
 				ACDBF68C19348D37001FF4ED /* Memory */,
@@ -372,6 +388,7 @@
 				8AFCD10619BF36A500A275EC /* chat_icon.png in Resources */,
 				ACDBF622190EF035001FF4ED /* Resized-86D1I.png in Resources */,
 				ACDBF624190EF10C001FF4ED /* Resized-86D1I.png in Resources */,
+				8AFCD11019C07B8A00A275EC /* ViewControllerNotes.xib in Resources */,
 				8AFCD10519BF2DD200A275EC /* notes.png in Resources */,
 				ACDBF62C190F1333001FF4ED /* MainVC.xib in Resources */,
 				ACDBF68719346DFD001FF4ED /* workbook.png in Resources */,
@@ -403,6 +420,7 @@
 				ACDBF66C191049DC001FF4ED /* ZipArchive.mm in Sources */,
 				8AB775AD19AD95D500FC9A0A /* Row.m in Sources */,
 				ACDBF67B19147185001FF4ED /* base64-1.m in Sources */,
+				8AFCD10F19C07B8A00A275EC /* ViewControllerNotes.m in Sources */,
 				8AB775AC19AD95D500FC9A0A /* Refresh.m in Sources */,
 				8AB775B519B72EBE00FC9A0A /* bwMessages.m in Sources */,
 				ACDBF68419183E61001FF4ED /* intelligence.m in Sources */,

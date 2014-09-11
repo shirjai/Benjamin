@@ -15,6 +15,7 @@
 
 - (IBAction)Wb:(id)sender;
 - (IBAction)msgs:(id)sender;
+- (IBAction)notes:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnMsgs;
 @property (strong, nonatomic) IBOutlet UIButton *btnNotes;

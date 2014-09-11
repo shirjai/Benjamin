@@ -66,6 +66,9 @@
                     <state key="normal" title="ButtonNotes" image="notes.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="notes:" destination="-1" eventType="touchUpInside" id="zLA-b9-QtW"/>
+                    </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BWT Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NNd-U4-xN7">
                     <rect key="frame" x="177" y="73" width="68" height="21"/>
