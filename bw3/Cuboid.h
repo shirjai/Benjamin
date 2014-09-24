@@ -13,8 +13,10 @@
 @interface Cuboid : NSObject
 
 -(void)SetCuboid:(BwCuboid*) BWC;
--(NSMutableArray*)GetRow;
 -(void) SetCuboidRefresh:(BwCuboid *)BWC;
+
+-(void)SetRow:(NSMutableArray *)rows;
+-(NSMutableArray*)GetRow;
 
 -(void)Settx_id:(int) txid;
 -(int)Gettx_id;
@@ -24,5 +26,8 @@
 
 -(void)SetNumCols:(int) ColCount;
 -(int)GetNumCols;
+
+-(void)SetTableId:(int)tblID;
+-(int)GetTableId;
 
 @end

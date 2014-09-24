@@ -126,12 +126,27 @@
     return NumCols;
 }
 
-
-
 //-----
+-(void)SetRow:(NSMutableArray *)rows
+{
+    Rows = rows;
+}
+
 -(NSMutableArray *)GetRow
 {
     return Rows;
 }
+
+
+//-----
+-(void)SetTableId:(int)tblID
+{
+    TableId = tblID;
+}
+-(int)GetTableId
+{
+    return  TableId;
+}
+
 
 @end
