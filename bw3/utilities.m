@@ -114,68 +114,74 @@
      NSMutableArray *cellsnew;
      cellsold = [BWC GetCells];
      cellsnew = [[NSMutableArray alloc]init];
- 
+     NSMutableArray *newrows = [[NSMutableArray alloc]init];
+     
      //---travrse through the row objects
      NSMutableArray *newrowids = [BWC GetRowIds];
      int oldrowcount = [newrowids count];
      Row *R1;
      NSArray *Rows = [CUB GetRow];
      for(int i=0;i<[Rows count];i++)
-        {
-            R1 = [[Row alloc]init];
-            R1 = [Rows objectAtIndex:i];
-            int rowidnew = [R1 GetRowID];
-            int newrowflag = 1;
-            //--traverse through rowids and if new rowid then add to rowid array
-            for(int j=0;j<[newrowids count];j++)
-            {
-                int newrowid = [[newrowids objectAtIndex:j] intValue];
-                if(rowidnew == newrowid)
-                {
-                    newrowflag = 0;
-                }
-            }
-            if(newrowflag == 1)
-            {
-                NSString *newrowidtocuboid = [NSString stringWithFormat:@"%d",rowidnew];
-                [newrowids addObject:newrowidtocuboid];
-            }
- 
- 
-            //--traverse through all cells to add to cells array
-            
- 
- 
-            NSArray *ColName = [R1 GetColNames];
-            NSArray *Value = [R1 GetValues];
-            int newrowcount = 0;
-            //--for new rows
-            if(newrowflag == 1)
-            {
-                int l = 0;
-                int m = 1;
-                for(int k = 0;k<[cellsold count];k++)
-                {
-                    if(m==(oldrowcount+newrowcount))
-                    {
-                        [cellsnew addObject:[cellsold objectAtIndex:k]];
-                        [cellsnew addObject:[Value objectAtIndex:l]];
-                        m=0;
-                        l=l+1;
-                    }
-                    else
-                    {
-                        [cellsnew addObject:[cellsold objectAtIndex:k]];
-                    }
-                    m=m+1;
-                }
-                newrowcount = newrowcount+1;
-            }
- 
- 
-            //--for existing rows
- 
-        }
+     {
+         R1 = [[Row alloc]init];
+         R1 = [Rows objectAtIndex:i];
+         int rowidnew = [R1 GetRowID];
+         int newrowflag = 1;
+         //--traverse through rowids and if new rowid then add to rowid array
+         for(int j=0;j<[newrowids count];j++)
+         {
+             int newrowid = [[newrowids objectAtIndex:j] intValue];
+             if(rowidnew == newrowid)
+             {
+                 newrowflag = 0;
+             }
+         }
+         if(newrowflag == 1)
+         {
+             [newrows addObject:R1];
+             NSString *newrowidtocuboid = [NSString stringWithFormat:@"%d",rowidnew];
+             [newrowids addObject:newrowidtocuboid];
+         }
+         
+         
+         //--traverse through all cells to add to cells array
+         
+     }
+     
+     
+     //--for new rows
+     if([newrows count] > 0)
+     {
+         int l = 0;
+         int m = 1;
+         for(int k = 0;k<[cellsold count];k++)
+         {
+             if(m==(oldrowcount))
+             {
+                 [cellsnew addObject:[cellsold objectAtIndex:k]];
+                 for(int xi = 0;xi<[newrows count];xi++)
+                 {
+                     R1 = [newrows objectAtIndex:xi];
+                     //NSArray *ColName = [R1 GetColNames];
+                     NSArray *Value = [R1 GetValues];
+                     
+                     [cellsnew addObject:[Value objectAtIndex:l]];
+                 }
+                 m=0;
+                 l=l+1;
+             }
+             else
+             {
+                 [cellsnew addObject:[cellsold objectAtIndex:k]];
+             }
+             m=m+1;
+         }
+         
+     }
+     
+     
+     //--for existing rows
+     
      
      [BWC SetRowIds:newrowids];
      
@@ -184,8 +190,143 @@
          [BWC SetCells:cellsnew];
      }
      return BWC;
- 
+     
+ }
+
+
+
+- (BwCuboid *)MergeSubmitCuboid:(Cuboid *)CUB :(BwCuboid *)BWC
+{
+    [BWC SetNumCols:[CUB GetNumCols]];
+    [BWC SetNumRows:[CUB GetNumRows]];
+    [BWC SetExportTid:[CUB Gettx_id]];
+    
+    NSMutableArray *cellsold;
+    NSMutableArray *cellsnew;
+    cellsold = [BWC GetCells];
+    cellsnew = [[NSMutableArray alloc]init];
+    
+    NSMutableArray *newrows = [[NSMutableArray alloc]init];
+    NSMutableArray *oldrows = [[NSMutableArray alloc]init];
+    //---travrse through the row objects
+    NSMutableArray *newrowids = [BWC GetRowIds];
+    int oldrowcount = [newrowids count];
+    Row *R1;
+    NSArray *Rows = [CUB GetRow];
+    for(int i=0;i<[Rows count];i++)
+    {
+        R1 = [[Row alloc]init];
+        R1 = [Rows objectAtIndex:i];
+        int rowidnew = [R1 GetRowID];
+        int newrowflag = 1;
+        //--traverse through rowids and if new rowid then add to rowid array
+        for(int j=0;j<[newrowids count];j++)
+        {
+            int newrowid = [[newrowids objectAtIndex:j] intValue];
+            if(rowidnew == newrowid)
+            {
+                newrowflag = 0;
+            }
+        }
+        if(newrowflag == 1)
+        {
+            [newrows addObject:R1];
+            NSString *newrowidtocuboid = [NSString stringWithFormat:@"%d",rowidnew];
+            [newrowids addObject:newrowidtocuboid];
+        }
+        else
+        {
+            [oldrows addObject:R1];
+        }
+       
+        
+        //--traverse through all cells to add to cells array
+        
+    }
+    
+        
+        //--for new rows
+        if([newrows count] > 0)
+        {
+            int l = 0;
+            int m = 1;
+            for(int k = 0;k<[cellsold count];k++)
+            {
+                if(m==(oldrowcount))
+                {
+                    [cellsnew addObject:[cellsold objectAtIndex:k]];
+                    for(int xi = 0;xi<[newrows count];xi++)
+                    {
+                        R1 = [newrows objectAtIndex:xi];
+                        //NSArray *ColName = [R1 GetColNames];
+                        NSArray *Value = [R1 GetValues];
+                        
+                        [cellsnew addObject:[Value objectAtIndex:l]];
+                    }
+                    m=0;
+                    l=l+1;
+                }
+                else
+                {
+                    [cellsnew addObject:[cellsold objectAtIndex:k]];
+                }
+                m=m+1;
+            }
+            
+        }
+        else
+        {
+            cellsnew = [BWC GetCells];
+        }
+        //--for existing rows
+        if ([oldrows count]>0)
+        {
+            int numrows = [newrowids count];
+            NSArray *colnames = [BWC GetColumnNames];
+            int numcols = [colnames count];
+            
+            for(int ori = 0;ori<[oldrows count];ori++)
+            {
+                Row *R1 = [oldrows objectAtIndex:ori];
+                int rowid = [R1 GetRowID];
+                NSArray *cName = [R1 GetColNames];
+                NSArray *cval = [R1 GetValues];
+                
+                for(int i = 0; i < numrows; i++)
+                {
+                    if([[newrowids objectAtIndex:i]intValue] == rowid)
+                        {
+                            for(int j= 0 ;j<numcols;j++)
+                            {
+                                for(int k =0;k<[cName count];k++)
+                                {
+                                    if([[colnames objectAtIndex:j] isEqualToString:[cName objectAtIndex:k]])
+                                    {
+                                        [cellsnew setObject:[cval objectAtIndex:k] atIndexedSubscript:(i+(j*numrows))];
+                                        //[cellsnew objectAtIndex:(i+(j*NumRows))]
+                                    }
+                                }
+                           }
+                        }
+                }
+                
+            }
+
+        }
+    
+    
+    
+
+    [BWC SetRowIds:newrowids];
+    
+    if([cellsnew count]>0)
+    {
+        [BWC SetCells:cellsnew];
+    }
+    return BWC;
+
+    
+    
 }
- 
 
 @end
