@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		8A54624A198150A0007BAEDA /* TableViewCellMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A546249198150A0007BAEDA /* TableViewCellMessages.m */; };
 		8A8EF8BB1979596200A2C2C6 /* viewMsgs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A8EF8BA1979596200A2C2C6 /* viewMsgs.xib */; };
+		8AAB37A419D14904001FBA05 /* NotesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AAB37A319D14904001FBA05 /* NotesWindow.xib */; };
+		8AAB37A819D15080001FBA05 /* NotesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB37A619D15080001FBA05 /* NotesTableViewController.m */; };
+		8AAB37A919D15080001FBA05 /* NotesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AAB37A719D15080001FBA05 /* NotesTableViewController.xib */; };
+		8AAB37AD19D2C719001FBA05 /* NotesDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB37AB19D2C719001FBA05 /* NotesDetailsViewController.m */; };
+		8AAB37AE19D2C719001FBA05 /* NotesDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AAB37AC19D2C719001FBA05 /* NotesDetailsViewController.xib */; };
 		8AB7758819A7680F00FC9A0A /* Buffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB7758619A7680F00FC9A0A /* Buffer.m */; };
 		8AB775A119AD94E600FC9A0A /* BwCuboid.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB775A019AD94E600FC9A0A /* BwCuboid.m */; };
 		8AB775A419AD951F00FC9A0A /* Cuboid.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB775A219AD951F00FC9A0A /* Cuboid.m */; };
@@ -21,8 +26,6 @@
 		8AB775B819B98FDD00FC9A0A /* spready.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AB775B719B98FDD00FC9A0A /* spready.png */; };
 		8AFCD10519BF2DD200A275EC /* notes.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AFCD10419BF2DD200A275EC /* notes.png */; };
 		8AFCD10619BF36A500A275EC /* chat_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AFCD10819BF36A500A275EC /* chat_icon.png */; };
-		8AFCD10F19C07B8A00A275EC /* ViewControllerNotes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFCD10D19C07B8A00A275EC /* ViewControllerNotes.m */; };
-		8AFCD11019C07B8A00A275EC /* ViewControllerNotes.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AFCD10E19C07B8A00A275EC /* ViewControllerNotes.xib */; };
 		ACDBF5FF190EEFF8001FF4ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDBF5FE190EEFF8001FF4ED /* UIKit.framework */; };
 		ACDBF601190EEFF8001FF4ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDBF600190EEFF8001FF4ED /* Foundation.framework */; };
 		ACDBF603190EEFF8001FF4ED /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDBF602190EEFF8001FF4ED /* CoreGraphics.framework */; };
@@ -57,6 +60,13 @@
 		8A546248198150A0007BAEDA /* TableViewCellMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellMessages.h; sourceTree = "<group>"; };
 		8A546249198150A0007BAEDA /* TableViewCellMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellMessages.m; sourceTree = "<group>"; };
 		8A8EF8BA1979596200A2C2C6 /* viewMsgs.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = viewMsgs.xib; sourceTree = "<group>"; };
+		8AAB37A319D14904001FBA05 /* NotesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotesWindow.xib; sourceTree = "<group>"; };
+		8AAB37A519D15080001FBA05 /* NotesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesTableViewController.h; sourceTree = "<group>"; };
+		8AAB37A619D15080001FBA05 /* NotesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesTableViewController.m; sourceTree = "<group>"; };
+		8AAB37A719D15080001FBA05 /* NotesTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotesTableViewController.xib; sourceTree = "<group>"; };
+		8AAB37AA19D2C719001FBA05 /* NotesDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesDetailsViewController.h; sourceTree = "<group>"; };
+		8AAB37AB19D2C719001FBA05 /* NotesDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesDetailsViewController.m; sourceTree = "<group>"; };
+		8AAB37AC19D2C719001FBA05 /* NotesDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotesDetailsViewController.xib; sourceTree = "<group>"; };
 		8AB7758619A7680F00FC9A0A /* Buffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Buffer.m; sourceTree = "<group>"; };
 		8AB7758719A7680F00FC9A0A /* Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Buffer.h; sourceTree = "<group>"; };
 		8AB7759F19AD94E600FC9A0A /* BwCuboid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BwCuboid.h; sourceTree = "<group>"; };
@@ -78,9 +88,6 @@
 		8AB775B719B98FDD00FC9A0A /* spready.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spready.png; sourceTree = "<group>"; };
 		8AFCD10419BF2DD200A275EC /* notes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notes.png; sourceTree = "<group>"; };
 		8AFCD10719BF36A500A275EC /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/chat_icon.png; sourceTree = "<group>"; };
-		8AFCD10C19C07B8A00A275EC /* ViewControllerNotes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerNotes.h; sourceTree = "<group>"; };
-		8AFCD10D19C07B8A00A275EC /* ViewControllerNotes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerNotes.m; sourceTree = "<group>"; };
-		8AFCD10E19C07B8A00A275EC /* ViewControllerNotes.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewControllerNotes.xib; sourceTree = "<group>"; };
 		ACDBF5FB190EEFF8001FF4ED /* bw3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bw3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDBF5FE190EEFF8001FF4ED /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ACDBF600190EEFF8001FF4ED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -161,9 +168,13 @@
 		8AFCD10B19C07B4C00A275EC /* notes */ = {
 			isa = PBXGroup;
 			children = (
-				8AFCD10C19C07B8A00A275EC /* ViewControllerNotes.h */,
-				8AFCD10D19C07B8A00A275EC /* ViewControllerNotes.m */,
-				8AFCD10E19C07B8A00A275EC /* ViewControllerNotes.xib */,
+				8AAB37A319D14904001FBA05 /* NotesWindow.xib */,
+				8AAB37A719D15080001FBA05 /* NotesTableViewController.xib */,
+				8AAB37A519D15080001FBA05 /* NotesTableViewController.h */,
+				8AAB37A619D15080001FBA05 /* NotesTableViewController.m */,
+				8AAB37AA19D2C719001FBA05 /* NotesDetailsViewController.h */,
+				8AAB37AB19D2C719001FBA05 /* NotesDetailsViewController.m */,
+				8AAB37AC19D2C719001FBA05 /* NotesDetailsViewController.xib */,
 			);
 			name = notes;
 			sourceTree = "<group>";
@@ -387,9 +398,11 @@
 				ACDBF61B190EEFF8001FF4ED /* ViewController.xib in Resources */,
 				8AFCD10619BF36A500A275EC /* chat_icon.png in Resources */,
 				ACDBF622190EF035001FF4ED /* Resized-86D1I.png in Resources */,
+				8AAB37A919D15080001FBA05 /* NotesTableViewController.xib in Resources */,
 				ACDBF624190EF10C001FF4ED /* Resized-86D1I.png in Resources */,
-				8AFCD11019C07B8A00A275EC /* ViewControllerNotes.xib in Resources */,
+				8AAB37A419D14904001FBA05 /* NotesWindow.xib in Resources */,
 				8AFCD10519BF2DD200A275EC /* notes.png in Resources */,
+				8AAB37AE19D2C719001FBA05 /* NotesDetailsViewController.xib in Resources */,
 				ACDBF62C190F1333001FF4ED /* MainVC.xib in Resources */,
 				ACDBF68719346DFD001FF4ED /* workbook.png in Resources */,
 			);
@@ -411,6 +424,7 @@
 				ACDBF627190F095E001FF4ED /* UserLogin.m in Sources */,
 				ACDBF62B190F1333001FF4ED /* MainVC.m in Sources */,
 				ACDBF65A1910483F001FF4ED /* Http.m in Sources */,
+				8AAB37AD19D2C719001FBA05 /* NotesDetailsViewController.m in Sources */,
 				ACDBF668191049DC001FF4ED /* ioapi.c in Sources */,
 				ACDBF669191049DC001FF4ED /* mztools.c in Sources */,
 				ACDBF66A191049DC001FF4ED /* unzip.c in Sources */,
@@ -420,10 +434,10 @@
 				ACDBF66C191049DC001FF4ED /* ZipArchive.mm in Sources */,
 				8AB775AD19AD95D500FC9A0A /* Row.m in Sources */,
 				ACDBF67B19147185001FF4ED /* base64-1.m in Sources */,
-				8AFCD10F19C07B8A00A275EC /* ViewControllerNotes.m in Sources */,
 				8AB775AC19AD95D500FC9A0A /* Refresh.m in Sources */,
 				8AB775B519B72EBE00FC9A0A /* bwMessages.m in Sources */,
 				ACDBF68419183E61001FF4ED /* intelligence.m in Sources */,
+				8AAB37A819D15080001FBA05 /* NotesTableViewController.m in Sources */,
 				ACDBF68B193482EE001FF4ED /* WBclass.m in Sources */,
 				8AB775B019AD961800FC9A0A /* utilities.m in Sources */,
 				ACDBF693193DC014001FF4ED /* LinkImport.m in Sources */,

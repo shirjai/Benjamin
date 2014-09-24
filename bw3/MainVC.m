@@ -12,6 +12,8 @@
 #import "viewMsgs.h"
 #import "AppDelegate.h"
 
+#import "NotesTableViewController.h"
+
 @interface MainVC ()
 
 @end
@@ -130,6 +132,23 @@
 }
 
 - (IBAction)notes:(id)sender {
+    
+
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    
+    NotesTableViewController  *ntvc = [[NotesTableViewController alloc] initWithNibName:@"NotesTableViewController" bundle:nil];
+    
+    UINavigationController *navCMsgs = [[UINavigationController alloc] initWithRootViewController:ntvc];
+    
+    appDelegate.window.rootViewController = navCMsgs;
+    
+    NSLog(@"%@",self.navigationController);
+    
+    [self.navigationController pushViewController:ntvc animated:YES];
+    
+   // NSLog(@"%@",self.navigationController);
+    
     
 }
 
