@@ -14,6 +14,7 @@
 		8AAB37A919D15080001FBA05 /* NotesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AAB37A719D15080001FBA05 /* NotesTableViewController.xib */; };
 		8AAB37AD19D2C719001FBA05 /* NotesDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB37AB19D2C719001FBA05 /* NotesDetailsViewController.m */; };
 		8AAB37AE19D2C719001FBA05 /* NotesDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AAB37AC19D2C719001FBA05 /* NotesDetailsViewController.xib */; };
+		8AAB37B119D304F2001FBA05 /* Submit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB37B019D304F2001FBA05 /* Submit.m */; };
 		8AB7758819A7680F00FC9A0A /* Buffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB7758619A7680F00FC9A0A /* Buffer.m */; };
 		8AB775A119AD94E600FC9A0A /* BwCuboid.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB775A019AD94E600FC9A0A /* BwCuboid.m */; };
 		8AB775A419AD951F00FC9A0A /* Cuboid.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB775A219AD951F00FC9A0A /* Cuboid.m */; };
@@ -67,6 +68,8 @@
 		8AAB37AA19D2C719001FBA05 /* NotesDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesDetailsViewController.h; sourceTree = "<group>"; };
 		8AAB37AB19D2C719001FBA05 /* NotesDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesDetailsViewController.m; sourceTree = "<group>"; };
 		8AAB37AC19D2C719001FBA05 /* NotesDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotesDetailsViewController.xib; sourceTree = "<group>"; };
+		8AAB37AF19D304F2001FBA05 /* Submit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Submit.h; sourceTree = "<group>"; };
+		8AAB37B019D304F2001FBA05 /* Submit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Submit.m; sourceTree = "<group>"; };
 		8AB7758619A7680F00FC9A0A /* Buffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Buffer.m; sourceTree = "<group>"; };
 		8AB7758719A7680F00FC9A0A /* Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Buffer.h; sourceTree = "<group>"; };
 		8AB7759F19AD94E600FC9A0A /* BwCuboid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BwCuboid.h; sourceTree = "<group>"; };
@@ -324,6 +327,8 @@
 		ACDBF690193DBFF0001FF4ED /* Boardwalk */ = {
 			isa = PBXGroup;
 			children = (
+				8AAB37AF19D304F2001FBA05 /* Submit.h */,
+				8AAB37B019D304F2001FBA05 /* Submit.m */,
 				8AB775A819AD95D500FC9A0A /* Refresh.h */,
 				8AB775A919AD95D500FC9A0A /* Refresh.m */,
 				8AB775AA19AD95D500FC9A0A /* Row.h */,
@@ -418,6 +423,7 @@
 				8AB775A119AD94E600FC9A0A /* BwCuboid.m in Sources */,
 				8A54624A198150A0007BAEDA /* TableViewCellMessages.m in Sources */,
 				ACDBF60B190EEFF8001FF4ED /* main.m in Sources */,
+				8AAB37B119D304F2001FBA05 /* Submit.m in Sources */,
 				ACDBF60F190EEFF8001FF4ED /* AppDelegate.m in Sources */,
 				ACDBF618190EEFF8001FF4ED /* ViewController.m in Sources */,
 				8AB775A419AD951F00FC9A0A /* Cuboid.m in Sources */,
