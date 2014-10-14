@@ -16,12 +16,13 @@
 
 @implementation NotesHandler
 
+Cuboid *cuboidNotes = nil;//[[Cuboid alloc] init];
 
 -(void)loadBenjaminNotes:(NSInteger *)IntNotesId :(MainVC *) mainVCObj{
 
 
     LinkImport *linkImportNotes = [LinkImport alloc];
-    Cuboid *cuboidNotes = [[Cuboid alloc] init];
+    
     cuboidNotes = [linkImportNotes LinkImportApi:IntNotesId];
 
     if ([cuboidNotes GetTableId] != 0)
@@ -74,6 +75,7 @@
     else{
         NSString *strColName = nil;
         NSString *strColVal = nil;
+        NSNumber *numRowId = nil;
         Row *eachRow = nil;
         int irowCnt = 0;
         
@@ -83,8 +85,10 @@
             eachRow = notesRowArray[irowCnt];
             NSLog(@"eachRow:%@",eachRow);
             NSLog(@"Rowid:%d",[eachRow RowId]);
-            
+
             NSMutableDictionary *dictmsgs = [[NSMutableDictionary alloc] init];
+            numRowId = [NSNumber numberWithInt:[eachRow RowId]];
+            [dictmsgs setObject:numRowId forKey:@"RowId"];
             
             for (int i=0; i <[[eachRow ColName] count];i++)
             {
@@ -93,7 +97,7 @@
                 strColVal = [[eachRow Value] objectAtIndex:i];
                 NSLog(@"colname:%@",strColName);
                 NSLog(@"colvalue:%@",strColVal);
-
+                
                 if ([strColName isEqualToString:@"NotesTimestamp"])
                 {
                     [dictmsgs setObject:strColVal forKey:@"NotesTimestamp"];
@@ -113,7 +117,13 @@
     
 }
 
-+(void)submitNotes:(NSArray *)newNote{
++(void)submitNotes:(NSDictionary *)newNote{
+    
+    //set a cuboid object from the incoming dictonary object
+    Cuboid *submitNotesCub = cuboidNotes;
+    Row *newRow = [[Row alloc]init];
+    
+    //[newRow setRowid:newNote.r
     
 }
 @end
