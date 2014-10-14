@@ -12,6 +12,7 @@
 #import "LinkImport.h"
 #import "NotesTableViewController.h"
 #import "AppDelegate.h"
+#import "Submit.h"
 
 @implementation NotesHandler
 
@@ -145,6 +146,10 @@
         }
     }
     return cubmsgs;
+    
+}
+
++(void)submitNotes:(NSArray *)newNote{
     
 }
 @end

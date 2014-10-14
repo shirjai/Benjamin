@@ -10,6 +10,7 @@
 #import "NotesHandler.h"
 #import "common.h"
 
+
 @interface NotesDetailsViewController ()
 
 @property (nonatomic, strong) NSString* notesText;

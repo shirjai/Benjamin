@@ -28,6 +28,7 @@
 		8AD7822719ED061E009A33E7 /* notesDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD7822619ED061E009A33E7 /* notesDetail.m */; };
 		8AD7822A19ED06F2009A33E7 /* NotesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD7822919ED06F2009A33E7 /* NotesHandler.m */; };
 		8AD7822D19ED17AB009A33E7 /* common.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD7822C19ED17AB009A33E7 /* common.m */; };
+		8AD7823319ED2C00009A33E7 /* Submit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD7823119ED2C00009A33E7 /* Submit.m */; };
 		8AFCD10519BF2DD200A275EC /* notes.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AFCD10419BF2DD200A275EC /* notes.png */; };
 		8AFCD10619BF36A500A275EC /* chat_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AFCD10819BF36A500A275EC /* chat_icon.png */; };
 		ACDBF5FF190EEFF8001FF4ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDBF5FE190EEFF8001FF4ED /* UIKit.framework */; };
@@ -97,6 +98,8 @@
 		8AD7822919ED06F2009A33E7 /* NotesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesHandler.m; sourceTree = "<group>"; };
 		8AD7822B19ED17AB009A33E7 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		8AD7822C19ED17AB009A33E7 /* common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = common.m; sourceTree = "<group>"; };
+		8AD7823119ED2C00009A33E7 /* Submit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Submit.m; sourceTree = "<group>"; };
+		8AD7823219ED2C00009A33E7 /* Submit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Submit.h; sourceTree = "<group>"; };
 		8AFCD10419BF2DD200A275EC /* notes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notes.png; sourceTree = "<group>"; };
 		8AFCD10719BF36A500A275EC /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/chat_icon.png; sourceTree = "<group>"; };
 		ACDBF5FB190EEFF8001FF4ED /* bw3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bw3.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -343,6 +346,8 @@
 		ACDBF690193DBFF0001FF4ED /* Boardwalk */ = {
 			isa = PBXGroup;
 			children = (
+				8AD7823219ED2C00009A33E7 /* Submit.h */,
+				8AD7823119ED2C00009A33E7 /* Submit.m */,
 				8AB775A819AD95D500FC9A0A /* Refresh.h */,
 				8AB775A919AD95D500FC9A0A /* Refresh.m */,
 				8AB775AA19AD95D500FC9A0A /* Row.h */,
@@ -460,6 +465,7 @@
 				ACDBF68419183E61001FF4ED /* intelligence.m in Sources */,
 				8AAB37A819D15080001FBA05 /* NotesTableViewController.m in Sources */,
 				ACDBF68B193482EE001FF4ED /* WBclass.m in Sources */,
+				8AD7823319ED2C00009A33E7 /* Submit.m in Sources */,
 				8AD7822D19ED17AB009A33E7 /* common.m in Sources */,
 				8AB775B019AD961800FC9A0A /* utilities.m in Sources */,
 				ACDBF693193DC014001FF4ED /* LinkImport.m in Sources */,

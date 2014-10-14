@@ -12,5 +12,6 @@
 @interface NotesHandler : NSObject
 
 -(void)loadBenjaminNotes : (NSInteger *)IntNotesId: (MainVC *) mainVCObj;
++(void)submitNotes:(NSArray *)newNote;
 
 @end
