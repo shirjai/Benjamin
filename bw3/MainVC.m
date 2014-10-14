@@ -9,10 +9,17 @@
 #import "MainVC.h"
 #import "Database.h"
 #import "LinkImport.h"
-#import "viewMsgs.h"
+
 #import "AppDelegate.h"
 
-#import "NotesTableViewController.h"
+/******** added by shirish 9/23/14 starts *******/
+#import "viewMsgs.h"
+#import "NotesHandler.h"
+
+/******** added by shirish 9/23/14 ends *******/
+
+////temp
+//#import "NotesTableViewController.h"
 
 @interface MainVC ()
 
@@ -84,10 +91,11 @@
     viewMsgsObj.msgCubId = IntMsgId;
     
     
-    if (cubMsg != Nil)
+    if ([cubMsg GetTableId]!= 0)
     {
         NSLog(@"Data returned from server");
         
+
         NSMutableArray *rowArray =[cubMsg GetRow];
         NSMutableArray *cubmsgs = [[NSMutableArray alloc] init];
         cubmsgs = [viewMsgsObj loadMessages:rowArray :@"linkImport"];
@@ -98,11 +106,13 @@
         
         
         //UINavigationController *navCMsgs = [[UINavigationController alloc] init];
+
         
         UINavigationController *navCMsgs = [[UINavigationController alloc] initWithRootViewController:viewMsgsObj];
+
         [navCMsgs setViewControllers:[NSArray arrayWithObject:self]];
         
-        
+
         AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         
         appDelegate.window.rootViewController = navCMsgs;
@@ -134,23 +144,14 @@
 - (IBAction)notes:(id)sender {
     
 
-    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSInteger *IntNotesId = 2000283;
     
+    NotesHandler *notesHandlerObj = [[NotesHandler alloc] init];
     
-    NotesTableViewController  *ntvc = [[NotesTableViewController alloc] initWithNibName:@"NotesTableViewController" bundle:nil];
+    //[self.navigationController setViewControllers:[NSArray arrayWithObject:self]];
     
-    UINavigationController *navCMsgs = [[UINavigationController alloc] initWithRootViewController:ntvc];
-    
-    appDelegate.window.rootViewController = navCMsgs;
-    
-    NSLog(@"%@",self.navigationController);
-    
-    [self.navigationController pushViewController:ntvc animated:YES];
-    
-   // NSLog(@"%@",self.navigationController);
-    
-    
+    [notesHandlerObj loadBenjaminNotes:IntNotesId: self];
+
 }
-
-
+  
 @end

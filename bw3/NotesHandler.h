@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MainVC.h"
 
 @interface NotesHandler : NSObject
+
+-(void)loadBenjaminNotes : (NSInteger *)IntNotesId: (MainVC *) mainVCObj;
 
 @end

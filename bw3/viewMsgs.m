@@ -2,8 +2,8 @@
 //  viewMsgs.m
 //  bw3
 //
-//  Created by Sarang Kulkarni on 7/18/14.
-//  Copyright (c) 2014 Ashish. All rights reserved.
+//  Created by Shirish Jaiswal on 7/18/14.
+//  Copyright (c) 2014 Shirish Jaiswal. All rights reserved.
 //
 
 #import "viewMsgs.h"
@@ -83,8 +83,7 @@ static NSString *CellIdentifier = @"CellTableIdentifer";
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
-    
+    [super viewDidAppear:animated];    
     
 }
 
@@ -394,7 +393,7 @@ static NSString *CellIdentifier = @"CellTableIdentifer";
 }
 
 
--(NSMutableArray *)loadMessages:(NSMutableArray *)msgRowArray: (NSString *)action
+-(NSMutableArray *)loadMessages:(NSMutableArray *)msgRowArray : (NSString *)action
 {
     NSMutableArray *cubmsgs = [[NSMutableArray alloc] init];
     NSLog(@"Inside loadMessages");

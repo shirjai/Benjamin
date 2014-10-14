@@ -24,6 +24,10 @@
 		8AB775B519B72EBE00FC9A0A /* bwMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB775B219B72EBE00FC9A0A /* bwMessages.m */; };
 		8AB775B619B72EBE00FC9A0A /* viewMsgs.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB775B419B72EBE00FC9A0A /* viewMsgs.m */; };
 		8AB775B819B98FDD00FC9A0A /* spready.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AB775B719B98FDD00FC9A0A /* spready.png */; };
+		8AD7822419ED04B3009A33E7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD7822319ED04B3009A33E7 /* QuartzCore.framework */; };
+		8AD7822719ED061E009A33E7 /* notesDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD7822619ED061E009A33E7 /* notesDetail.m */; };
+		8AD7822A19ED06F2009A33E7 /* NotesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD7822919ED06F2009A33E7 /* NotesHandler.m */; };
+		8AD7822D19ED17AB009A33E7 /* common.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD7822C19ED17AB009A33E7 /* common.m */; };
 		8AFCD10519BF2DD200A275EC /* notes.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AFCD10419BF2DD200A275EC /* notes.png */; };
 		8AFCD10619BF36A500A275EC /* chat_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AFCD10819BF36A500A275EC /* chat_icon.png */; };
 		ACDBF5FF190EEFF8001FF4ED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDBF5FE190EEFF8001FF4ED /* UIKit.framework */; };
@@ -86,6 +90,13 @@
 		8AB775B319B72EBE00FC9A0A /* viewMsgs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewMsgs.h; sourceTree = "<group>"; };
 		8AB775B419B72EBE00FC9A0A /* viewMsgs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewMsgs.m; sourceTree = "<group>"; };
 		8AB775B719B98FDD00FC9A0A /* spready.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spready.png; sourceTree = "<group>"; };
+		8AD7822319ED04B3009A33E7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8AD7822519ED061E009A33E7 /* notesDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notesDetail.h; sourceTree = "<group>"; };
+		8AD7822619ED061E009A33E7 /* notesDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notesDetail.m; sourceTree = "<group>"; };
+		8AD7822819ED06F2009A33E7 /* NotesHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesHandler.h; sourceTree = "<group>"; };
+		8AD7822919ED06F2009A33E7 /* NotesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesHandler.m; sourceTree = "<group>"; };
+		8AD7822B19ED17AB009A33E7 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		8AD7822C19ED17AB009A33E7 /* common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = common.m; sourceTree = "<group>"; };
 		8AFCD10419BF2DD200A275EC /* notes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notes.png; sourceTree = "<group>"; };
 		8AFCD10719BF36A500A275EC /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/chat_icon.png; sourceTree = "<group>"; };
 		ACDBF5FB190EEFF8001FF4ED /* bw3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bw3.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AD7822419ED04B3009A33E7 /* QuartzCore.framework in Frameworks */,
 				ACDBF66E19104C55001FF4ED /* libz.dylib in Frameworks */,
 				ACDBF5FF190EEFF8001FF4ED /* UIKit.framework in Frameworks */,
 				ACDBF601190EEFF8001FF4ED /* Foundation.framework in Frameworks */,
@@ -175,6 +187,10 @@
 				8AAB37AA19D2C719001FBA05 /* NotesDetailsViewController.h */,
 				8AAB37AB19D2C719001FBA05 /* NotesDetailsViewController.m */,
 				8AAB37AC19D2C719001FBA05 /* NotesDetailsViewController.xib */,
+				8AD7822519ED061E009A33E7 /* notesDetail.h */,
+				8AD7822619ED061E009A33E7 /* notesDetail.m */,
+				8AD7822819ED06F2009A33E7 /* NotesHandler.h */,
+				8AD7822919ED06F2009A33E7 /* NotesHandler.m */,
 			);
 			name = notes;
 			sourceTree = "<group>";
@@ -201,6 +217,7 @@
 		ACDBF5FD190EEFF8001FF4ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8AD7822319ED04B3009A33E7 /* QuartzCore.framework */,
 				ACDBF5FE190EEFF8001FF4ED /* UIKit.framework */,
 				ACDBF600190EEFF8001FF4ED /* Foundation.framework */,
 				ACDBF602190EEFF8001FF4ED /* CoreGraphics.framework */,
@@ -239,6 +256,8 @@
 				ACDBF68319183E60001FF4ED /* intelligence.m */,
 				8AB775AE19AD961800FC9A0A /* utilities.h */,
 				8AB775AF19AD961800FC9A0A /* utilities.m */,
+				8AD7822B19ED17AB009A33E7 /* common.h */,
+				8AD7822C19ED17AB009A33E7 /* common.m */,
 			);
 			path = bw3;
 			sourceTree = "<group>";
@@ -423,6 +442,8 @@
 				8AB775A419AD951F00FC9A0A /* Cuboid.m in Sources */,
 				ACDBF627190F095E001FF4ED /* UserLogin.m in Sources */,
 				ACDBF62B190F1333001FF4ED /* MainVC.m in Sources */,
+				8AD7822719ED061E009A33E7 /* notesDetail.m in Sources */,
+				8AD7822A19ED06F2009A33E7 /* NotesHandler.m in Sources */,
 				ACDBF65A1910483F001FF4ED /* Http.m in Sources */,
 				8AAB37AD19D2C719001FBA05 /* NotesDetailsViewController.m in Sources */,
 				ACDBF668191049DC001FF4ED /* ioapi.c in Sources */,
@@ -439,6 +460,7 @@
 				ACDBF68419183E61001FF4ED /* intelligence.m in Sources */,
 				8AAB37A819D15080001FBA05 /* NotesTableViewController.m in Sources */,
 				ACDBF68B193482EE001FF4ED /* WBclass.m in Sources */,
+				8AD7822D19ED17AB009A33E7 /* common.m in Sources */,
 				8AB775B019AD961800FC9A0A /* utilities.m in Sources */,
 				ACDBF693193DC014001FF4ED /* LinkImport.m in Sources */,
 				8AB7758819A7680F00FC9A0A /* Buffer.m in Sources */,
