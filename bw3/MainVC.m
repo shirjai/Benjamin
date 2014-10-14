@@ -150,7 +150,7 @@
     
     //[self.navigationController setViewControllers:[NSArray arrayWithObject:self]];
     
-    [notesHandlerObj loadBenjaminNotes:IntNotesId: self];
+    [notesHandlerObj loadBenjaminNotes:IntNotesId:self];
 
 }
   

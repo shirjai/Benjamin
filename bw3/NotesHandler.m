@@ -17,7 +17,7 @@
 @implementation NotesHandler
 
 
--(void)loadBenjaminNotes : (NSInteger *)IntNotesId: (MainVC *) mainVCObj{
+-(void)loadBenjaminNotes:(NSInteger *)IntNotesId :(MainVC *) mainVCObj{
 
 
     LinkImport *linkImportNotes = [LinkImport alloc];
@@ -47,7 +47,7 @@
     
         UINavigationController *navCMsgs = [[UINavigationController alloc] initWithRootViewController:ntvc];
     
-        [navCMsgs setViewControllers:[NSArray arrayWithObject:self]];
+        [navCMsgs setViewControllers:[NSArray arrayWithObject:mainVCObj]];
     
         appDelegate.window.rootViewController = navCMsgs;
     
@@ -84,7 +84,6 @@
             NSLog(@"eachRow:%@",eachRow);
             NSLog(@"Rowid:%d",[eachRow RowId]);
             
-            NSString *msgElement = nil;
             NSMutableDictionary *dictmsgs = [[NSMutableDictionary alloc] init];
             
             for (int i=0; i <[[eachRow ColName] count];i++)
@@ -94,52 +93,17 @@
                 strColVal = [[eachRow Value] objectAtIndex:i];
                 NSLog(@"colname:%@",strColName);
                 NSLog(@"colvalue:%@",strColVal);
-                
-                if ([strColName isEqualToString:@"1"])
+
+                if ([strColName isEqualToString:@"NotesTimestamp"])
                 {
-                    //msgElement = [NSString stringWithFormat:@"{%@:%@",strColName,strColVal];
-                    [dictmsgs setObject:strColVal forKey:@"User"];
-                    //[cubmsgs addObject:strColVal];
-                    //[msgs objectatindex:i] = @{@"User %@",strColVal};
-                    //[cubmsgs objectatindex:i] = @{@"%@:%@":strColName,strColVal};
+                    [dictmsgs setObject:strColVal forKey:@"NotesTimestamp"];
+                }
+                if ([strColName isEqualToString:@"NotesVal"])
+                {
+                    [dictmsgs setObject:strColVal forKey:@"NotesVal"];
                     
                 }
-                if ([strColName isEqualToString:@"3"])
-                {
-                    //msgElement = [NSString stringWithFormat:@"%@,Date:%@",msgElement,strColVal];
-                    
-                    // Formatter configuration
-                    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                    NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-                    [formatter setLocale:posix];
-                    [formatter setDateFormat:@"M.d.y"];
-                    
-                    // Date to string
-                    NSString *dateString = strColVal;
-                    NSDate *prettyDate = [formatter dateFromString:dateString];
-                    
-                    NSLog(@"strColVal:%@", prettyDate);
-                    
-                    [dictmsgs setObject:strColVal forKey:@"Date"];
-                }
-                if ([strColName isEqualToString:@"2"])
-                {
-                    
-                    [dictmsgs setObject:strColVal forKey:@"sheet"];
-                    
-                }
-                if ([strColName isEqualToString:@"0"])
-                {
-                    
-                    [dictmsgs setObject:strColVal forKey:@"Type"];
-                    
-                }
-                if ([strColName isEqualToString:@"4"])
-                {
-                    
-                    [dictmsgs setObject:strColVal forKey:@"Comment"];
-                    
-                }
+
             }
             //[cubmsgs addObject:msgElement];
             [cubmsgs addObject:dictmsgs];
