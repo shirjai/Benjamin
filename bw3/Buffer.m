@@ -8,7 +8,8 @@
 
 #import "Buffer.h"
 #import "Database.h"
-//#import "BwCuboid.h"
+#import "Row.h"
+
 
 @implementation Buffer
 
@@ -291,6 +292,210 @@
     
     
     return BWC;
+    
+}
+
+
+
+
+//---------------Submit
+-(NSString *)GetBufferSubmit:(Cuboid *)cub
+{
+    
+    //header
+    Database *DB = [[Database alloc]init];
+    [DB getPropertiesFile];
+    BwCuboid *BWD = [DB Getcuboid:[cub GetTableId]];
+    
+    
+    //extract cuboid new row array old row array
+    NSMutableArray *NewRowArr = [[NSMutableArray alloc]init];
+    NSMutableArray *OldRowArr = [[NSMutableArray alloc]init];
+    int newrowcount = 0;
+    int oldrowcount = 0;
+    //new rows
+    NSArray *NRows = [cub GetRow];
+    for(int nri = 0;nri<[NRows count];nri++)
+    {
+        Row *Nr = [NRows objectAtIndex:nri];
+        int rowid = [Nr GetRowID];
+        if(rowid == -1)
+        {
+            [NewRowArr addObject:Nr];
+            newrowcount = newrowcount + 1;
+        }
+        else
+        {
+            [OldRowArr addObject:Nr];
+            oldrowcount = oldrowcount +1;
+        }
+    }
+    
+    NSString *seperator = [NSString stringWithFormat:@"%c",1];
+    NSString *ContentDeLimiter = [NSString stringWithFormat:@"%c",2];
+    
+    //get all the properties of the user from database
+    NSString *UserID = [DB GetPropertyValue:@"UserId"];
+    NSString *UserName = [DB GetPropertyValue:@"UserName"];
+    NSString *UserPass = [DB GetPropertyValue:@"UserPass"];
+    NSString *MemberId = [DB GetPropertyValue:@"MemberId"];
+    NSString *NhId = [DB GetPropertyValue:@"NhId"];
+    int TableID = [cub GetTableId];
+    NSString *View = [BWD GetView];
+    int colcount = [BWD GetNumCols];
+    int rowcount = [BWD GetNumRows] + newrowcount;
+    int importid = [BWD Gettx_id];
+    int exportid = [BWD GetExportTid];
+    int critical = 0;
+    int criticalLevel = 1;
+    NSString *comments = @"update from Iphone";
+    
+    NSString *returnStr = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%d%@%@%@%d%@%d%@%d%@%d%@%d%@%d%@%@%@",UserID,seperator,UserName,seperator,UserPass,seperator,MemberId,seperator,NhId,seperator,TableID,seperator,View,seperator,colcount,seperator,rowcount,seperator,importid,seperator,exportid,seperator,critical,seperator,criticalLevel,seperator,comments,ContentDeLimiter];
+    
+    
+    //------------------get column string------------------
+    NSString *colstr = @"";
+    //colid,colname..
+    NSArray *Colids = [BWD GetColumnIds];
+    NSArray *colnames = [BWD GetColumnNames];
+    
+    for(int i=0;i<[Colids count]; i++)
+    {
+        colstr = [NSString stringWithFormat:@"%@%@%@%@%@",colstr,[Colids objectAtIndex:i],seperator,[colnames objectAtIndex:i],seperator];
+    }
+    
+    colstr = [colstr substringToIndex:[colstr length]-1];
+    
+    
+    
+    //------------------get row string------------------
+    NSString *rowstr = @"";
+    //rowid,..
+    NSArray *Rowids = [BWD GetRowIds];
+    
+    for(int i=0;i<[Rowids count]; i++)
+    {
+        rowstr = [NSString stringWithFormat:@"%@%@%@",rowstr,[Rowids objectAtIndex:i],seperator];
+    }
+    
+    
+    
+    for(int i=0;i<[NewRowArr count]; i++)
+    {
+        Row *Rnew = [NewRowArr objectAtIndex:i];
+        if([Rnew GetRowID] > 0)
+        {
+            rowstr = [NSString stringWithFormat:@"%@%@%@",rowstr,@" ",seperator];
+        }
+    }
+    
+    rowstr = [rowstr substringToIndex:[rowstr length]-1];
+    
+    
+    
+    //------------------get cell string------------------
+    //rowindex,colindex,cellval,formulaval,4
+    NSString *cellstr = @"";
+    Row *r = [[Row alloc]init];
+    NSMutableArray *Cname = [[NSMutableArray alloc]init];
+    NSMutableArray *val = [[NSMutableArray alloc]init];
+    
+    //newrows
+    for(int i=0;i<[NewRowArr count]; i++)
+    {
+        r = [NewRowArr objectAtIndex:i];
+        Cname = [r GetColNames];
+        val = [r GetValues];
+        
+        for(int j = 0;j< [Cname count];j++)
+        {
+            cellstr = [NSString stringWithFormat:@"%@%d%@%d%@%@%@%@%@%@%@",cellstr,[Rowids count]+i,seperator,j,seperator,[val objectAtIndex:j],seperator,[val objectAtIndex:j],seperator,@"4",seperator];
+        }
+        
+    }
+    //orldrows
+    for(int i=0;i<[OldRowArr count]; i++)
+    {
+        r = [NRows objectAtIndex:i];
+        Cname = [r GetColNames];
+        val = [r GetValues];
+        int rowid = [r GetRowID];
+        int rowindex = 0;
+        int colindex = 0;
+        for(int k = 0;k<[Rowids count];k++)
+        {
+            int oldrowid = [[Rowids objectAtIndex:k] intValue];
+            if(oldrowid == rowid)
+            {
+                rowindex = k;
+            }
+        }
+        
+        for(int j = 0;j< [Cname count];j++)
+        {
+            for(int l = 0;l<[colnames count];l++)
+            {
+                NSString *oldcolname = [colnames objectAtIndex:l];
+                if([oldcolname isEqualToString:[Cname objectAtIndex:j]])
+                {
+                    colindex = l;
+                }
+            }
+            
+            cellstr = [NSString stringWithFormat:@"%@%d%@%d%@%@%@%@%@%@%@",cellstr,rowindex,seperator,colindex,seperator,[val objectAtIndex:j],seperator,[val objectAtIndex:j],seperator,@"1",seperator];
+        }
+        
+    }
+    //cellstr = [cellstr substringToIndex:[cellstr length]-1];
+    
+    
+    returnStr = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",returnStr,colstr,ContentDeLimiter,rowstr,ContentDeLimiter,cellstr,ContentDeLimiter];
+    
+    return returnStr;
+    
+    
+}
+
+
+-(Cuboid *)ExtractResponseSubmit:(NSString *)ResBuffer:(Cuboid *) cub
+{
+    
+    NSString *seperator = [NSString stringWithFormat:@"%c",1];
+    NSString *ContentDeLimiter = [NSString stringWithFormat:@"%c",2];
+    
+    NSArray *resParts = [ResBuffer componentsSeparatedByString:ContentDeLimiter];
+    Row *r = [[Row alloc]init];
+    
+    NSString *ResBool = [resParts objectAtIndex:0];
+    NSLog(@"===response bool=>%@===",ResBool);
+    if ([ResBool isEqualToString: @"Success"])
+    {
+        int tid = [[resParts objectAtIndex:1] intValue];
+        NSString *NewRowsstr = [resParts objectAtIndex:2];
+        NSString *NewColsstr = [resParts objectAtIndex:3];
+        int numrows = [[resParts objectAtIndex:6] intValue];
+        int numcols = [[resParts objectAtIndex:7] intValue];
+        
+        [cub SetNumCols:numcols];
+        [cub SetNumRows:numrows];
+        [cub Settx_id:tid];
+        NSArray *rows = [cub GetRow];
+        NSMutableArray *returnrows = [[NSMutableArray alloc]init];
+        
+        NSMutableArray * newrows = [NewRowsstr componentsSeparatedByString:seperator];
+        for(int i = 0;i<[rows count];i++)
+        {
+            r = [rows objectAtIndex:i];
+            if([r GetRowID] == -1)
+            [r setRowid:[[newrows objectAtIndex:(i*2)+1] intValue]];
+            
+            [returnrows addObject:r];
+        }
+        [cub SetRow:returnrows];
+    }
+    
+    
+    return cub;
     
 }
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BwCuboid.h"
+#import "Cuboid.h"
 
 @interface Buffer : NSObject
 
@@ -22,5 +23,8 @@
 
 -(NSString *) GetBufferRefresh:(NSInteger *)TableID;
 -(BwCuboid *) ExtractResponseRefresh:(NSString*) ResBuffer:(int) mode;
+
+-(NSString *) GetBufferSubmit:(Cuboid *) cub;
+-(Cuboid *) ExtractResponseSubmit:(NSString *) ResBuffer:(Cuboid *) cub;
 
 @end

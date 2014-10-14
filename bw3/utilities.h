@@ -14,5 +14,6 @@
 -(NSString *) PrepareRequest: (NSString *)usrpass;
 -(NSString *) PrepareResponse: (NSMutableData *)usrpass;
 -(BwCuboid *) MergeRefreshCuboid:(Cuboid *) CUB:(BwCuboid *)BWC;
+-(BwCuboid *) MergeSubmitCuboid:(Cuboid *)CUB:(BwCuboid *)BWC;
 
 @end
