@@ -383,7 +383,7 @@
     for(int i=0;i<[NewRowArr count]; i++)
     {
         Row *Rnew = [NewRowArr objectAtIndex:i];
-        if([Rnew GetRowID] > 0)
+        if([Rnew GetRowID] < 0) // modified by shirish to fix submit bug > to < 15/10/12
         {
             rowstr = [NSString stringWithFormat:@"%@%@%@",rowstr,@" ",seperator];
         }

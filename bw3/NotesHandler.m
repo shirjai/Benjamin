@@ -16,6 +16,7 @@
 
 @implementation NotesHandler
 
+int notesTableId = -1;
 Cuboid *cuboidNotes = nil;//[[Cuboid alloc] init];
 
 -(void)loadBenjaminNotes:(NSInteger *)IntNotesId :(MainVC *) mainVCObj{
@@ -25,7 +26,8 @@ Cuboid *cuboidNotes = nil;//[[Cuboid alloc] init];
     
     cuboidNotes = [linkImportNotes LinkImportApi:IntNotesId];
 
-    if ([cuboidNotes GetTableId] != 0)
+    notesTableId = [cuboidNotes GetTableId];
+    if ( notesTableId != 0)
     {
         NSLog(@"Data returned from server");
     
@@ -120,10 +122,20 @@ Cuboid *cuboidNotes = nil;//[[Cuboid alloc] init];
 +(void)submitNotes:(NSDictionary *)newNote{
     
     //set a cuboid object from the incoming dictonary object
-    Cuboid *submitNotesCub = cuboidNotes;
-    Row *newRow = [[Row alloc]init];
+    Cuboid *submitNotesCub = [[Cuboid alloc] init];//cuboidNotes;
+
     
-    //[newRow setRowid:newNote.r
+    Row *newRow = [[Row alloc]init];
+    [newRow setRowid: [[newNote objectForKey:@"RowId"] intValue]];
+    [newRow setColumnData:@"NotesTimestamp":[newNote objectForKey:@"NotesTimestamp"]];
+    [newRow setColumnData:@"NotesVal":[newNote objectForKey:@"NotesVal"]];
+    
+    [submitNotesCub SetTableId:notesTableId];
+    NSMutableArray *changes = [[NSMutableArray alloc] init];
+    [changes addObject:newRow];
+    [submitNotesCub SetRow:changes];
+    
+    [[[Submit alloc]init] SubmitAPI:submitNotesCub];
     
 }
 @end
