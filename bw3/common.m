@@ -11,6 +11,13 @@
 
 @implementation common
 
+
+/*available transitions
+ 
+ kCATransitionFade,kCATransitionMoveIn, kCATransitionPush, kCATransitionReveal, @"cameraIris", @"cameraIrisHollowOpen", @"cameraIrisHollowClose", @"cube", @"alignedCube", @"flip", @"alignedFlip", @"oglFlip", @"rotate", @"pageCurl"
+    @"pageUnCurl", @"rippleEffect", @"suckEffect"
+ */
+
 +(CATransition *)getViewTransistionStylePageCurl{
     
     CATransition* transition = [CATransition animation];

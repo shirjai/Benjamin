@@ -98,7 +98,7 @@
         }
     }
     
-        
+ 
 	
 }
 
@@ -159,19 +159,20 @@
     NSValue *value  = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];//UIKeyboardFrameEndUserInfoKey
     CGSize keyboardSize = [value CGRectValue].size;
     
-   // UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-    //notesScrollView.contentInset = contentInsets;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+    notesDetailTextView.contentInset = contentInsets;
+     notesDetailTextView.scrollIndicatorInsets = contentInsets;
     
     CGRect viewFrame = self.view.frame;
 	viewFrame.size.height -= (keyboardSize.height);
     //resize the scroll view
-   // if (CGRectContainsPoint(viewFrame, notesDetailTextView.frame.origin)) {
-     //   [self.notesScrollView scrollRectToVisible:notesDetailTextView.frame animated:YES];
-   // }
+    if (!CGRectContainsPoint(viewFrame, notesDetailTextView.frame.origin)) {
+        [self.notesDetailTextView scrollRectToVisible:notesDetailTextView.frame animated:YES];
+    }
 	//notesScrollView.frame = viewFrame;
-    notesDetailTextView.frame = viewFrame;
+    //notesDetailTextView.frame = viewFrame;
     
- 
+
 }
 
 
@@ -180,16 +181,25 @@
 	NSDictionary* info = [notif userInfo];
 	NSValue* aValue = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
 	CGSize keyboardSize = [aValue CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+    notesDetailTextView.contentInset = contentInsets;
+    notesDetailTextView.scrollIndicatorInsets = contentInsets;
+    
 	CGRect viewFrame = self.view.frame;
 	viewFrame.size.height += keyboardSize.height;
+   //resize the scroll view
+    if (!CGRectContainsPoint(viewFrame, notesDetailTextView.frame.origin)) {
+        [self.notesDetailTextView scrollRectToVisible:notesDetailTextView.frame animated:YES];
+    }
+    
 	//notesScrollView.frame = viewFrame;
-    notesDetailTextView.frame = viewFrame;
-	
+   // notesDetailTextView.frame = viewFrame;
+    	
 	//if (!keyboardVisible) {
 		//NSLog(@"Keyboard is already hidden. Ignoring notification.");
 	//	return;
 	//}
-    
     
 }
 
