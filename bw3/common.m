@@ -7,7 +7,17 @@
 //
 
 #import "common.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation common
+
++(CATransition *)getViewTransistionStylePageCurl{
+    
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.4f;
+    transition.type = @"pageUnCurl";//kCATransitionMoveIn;
+    transition.subtype = kCATransitionFromTop;
+    return transition;
+}
 
 @end

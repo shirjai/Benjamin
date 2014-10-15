@@ -10,4 +10,6 @@
 
 @interface common : NSObject
 
++(CATransition *)getViewTransistionStylePageCurl;
+
 @end

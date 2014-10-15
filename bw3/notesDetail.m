@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:1.0f green:1.0f blue:0.6f alpha:1.0f];
+        self.backgroundColor = [UIColor colorWithRed:1.0f green:1.0f blue:0.8f alpha:1.0f];
         self.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:19];
     }
     return self;
@@ -39,8 +39,8 @@
     //Set the line offset from the baseline. (I'm sure there's a concrete way to calculate this.)
     CGFloat baselineOffset = 6.0f;
     
-    //iterate over numberOfLines and draw each line
-    for (int x = 0; x < numberOfLines; x++) {
+    //iterate over numberOfLines and draw each line. skip the first count to eliminate line from above text
+    for (int x = 1; x < numberOfLines; x++) {
         //0.5f offset lines up line with pixel boundary
         CGContextMoveToPoint(context, self.bounds.origin.x, self.font.leading*x + 0.5f + baselineOffset);
         CGContextAddLineToPoint(context, self.bounds.size.width, self.font.leading*x + 0.5f + baselineOffset);

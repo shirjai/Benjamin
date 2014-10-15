@@ -127,10 +127,10 @@
     //[self presentViewController:navCtrl animated:YES completion:nil];
     
     // get the pagecurl transition style
-    //CATransition* transition = [common getViewTransistionStylePageCurl];
+    CATransition* transition = [common getViewTransistionStylePageCurl];
     
-    //[self.navigationController.view.layer addAnimation:transition
-     //                                           forKey:kCATransition];
+    [self.navigationController.view.layer addAnimation:transition
+                                               forKey:kCATransition];
     
     [self.navigationController pushViewController:notesDetailsViewCtrl animated:NO];
 }
