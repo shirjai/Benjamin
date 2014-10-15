@@ -2,8 +2,8 @@
 //  common.m
 //  bw3
 //
-//  Created by Sarang Kulkarni on 10/14/14.
-//  Copyright (c) 2014 Ashish. All rights reserved.
+//  Created by Shirish Jaiswal on 10/14/14.
+//  Copyright (c) 2014 Shirish Jaiswal. All rights reserved.
 //
 
 #import "common.h"
@@ -18,6 +18,33 @@
     transition.type = @"pageUnCurl";//kCATransitionMoveIn;
     transition.subtype = kCATransitionFromTop;
     return transition;
+}
+
+// returns a substring from start char to end char
+// if start char not defined, take the first char of the string
+// if end char note defined, consider the end of the string
+
++(NSString *)getSubstring:(NSString *)stringParam defineStartChar:(NSString *)start defineEndChar:(NSString *)end{
+    
+    NSString *subString = nil;
+    NSRange startRange = [stringParam rangeOfString:start];
+    if (startRange.location != NSNotFound)
+    {
+        subString = [stringParam substringFromIndex:startRange.location];
+    }
+    else{
+        subString = [stringParam substringFromIndex:0];
+    }
+    
+    NSRange endRange = [stringParam rangeOfString:end];
+    if (endRange.location != NSNotFound)
+    {
+        subString = [stringParam substringToIndex:endRange.location];
+    }
+    else{
+        subString = [stringParam substringToIndex:stringParam.length];
+    }
+    return subString;
 }
 
 @end

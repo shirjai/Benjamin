@@ -81,8 +81,8 @@
     notesDetailTextView.frame = self.view.frame;
     
     //set the title for the detailed text view with size limited till first new line character
-    //NSString *note = [common getSubstring:notesDetailTextView.text defineStartChar:@"" defineEndChar:@"\n"];
-    //self.navigationItem.title = note;
+    NSString *note = [common getSubstring:notesDetailTextView.text defineStartChar:@"" defineEndChar:@"\n"];
+    self.navigationItem.title = note;
         
 
 }
@@ -270,11 +270,11 @@
     
     //set the title for new note or modify the title if changed
     NSString *currentNoteTitle = self.navigationItem.title;
- //   NSString *newNoteTitle = [common getSubstring:notesDetailTextView.text defineStartChar:@"" defineEndChar:@"\n"];
- //   if (![currentNoteTitle isEqualToString:newNoteTitle]) {
-//        self.navigationItem.title = newNoteTitle;
+    NSString *newNoteTitle = [common getSubstring:notesDetailTextView.text defineStartChar:@"" defineEndChar:@"\n"];
+    if (![currentNoteTitle isEqualToString:newNoteTitle]) {
+        self.navigationItem.title = newNoteTitle;
 
- //   }
+    }
     notesDetailTextView.delegate = self;
 }
 
