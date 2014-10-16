@@ -159,16 +159,20 @@
     NSValue *value  = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];//UIKeyboardFrameEndUserInfoKey
     CGSize keyboardSize = [value CGRectValue].size;
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-    notesDetailTextView.contentInset = contentInsets;
-     notesDetailTextView.scrollIndicatorInsets = contentInsets;
     
     CGRect viewFrame = self.view.frame;
 	viewFrame.size.height -= (keyboardSize.height);
-    //resize the scroll view
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+    notesDetailTextView.contentInset = contentInsets;
+    notesDetailTextView.scrollIndicatorInsets = contentInsets;
+
+    
+  /*  //resize the scroll view
     if (!CGRectContainsPoint(viewFrame, notesDetailTextView.frame.origin)) {
         [self.notesDetailTextView scrollRectToVisible:notesDetailTextView.frame animated:YES];
-    }
+    } */
+    
 	//notesScrollView.frame = viewFrame;
     //notesDetailTextView.frame = viewFrame;
     
@@ -182,12 +186,13 @@
 	NSValue* aValue = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
 	CGSize keyboardSize = [aValue CGRectValue].size;
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+	CGRect viewFrame = self.view.frame;
+	viewFrame.size.height += keyboardSize.height;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
     notesDetailTextView.contentInset = contentInsets;
     notesDetailTextView.scrollIndicatorInsets = contentInsets;
     
-	CGRect viewFrame = self.view.frame;
-	viewFrame.size.height += keyboardSize.height;
    //resize the scroll view
     if (!CGRectContainsPoint(viewFrame, notesDetailTextView.frame.origin)) {
         [self.notesDetailTextView scrollRectToVisible:notesDetailTextView.frame animated:YES];
