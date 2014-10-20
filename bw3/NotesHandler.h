@@ -2,7 +2,7 @@
 //  NotesHandler.h
 //  bw3
 //
-//  Created by Sarang Kulkarni on 10/14/14.
+//  Created by Shirish Jaiswal on 10/14/14.
 //  Copyright (c) 2014 Ashish. All rights reserved.
 //
 
@@ -11,7 +11,8 @@
 
 @interface NotesHandler : NSObject
 
--(void)loadBenjaminNotes : (NSInteger *)IntNotesId :(MainVC *) mainVCObj;
+-(void)loadBenjaminNotes  :(MainVC *) mainVCObj;
 +(void)submitNotes:(NSArray *)newNote;
++(NSDictionary *)loadValuesfromProperties;
 
 @end

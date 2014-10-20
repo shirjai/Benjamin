@@ -254,14 +254,22 @@
      //[DateFormat setFormatterBehavior:NSDateFormatterBehaviorDefault];
     NSMutableDictionary *newNote = [[NSMutableDictionary alloc] init];
     
+    //get notes properties
+    NSDictionary *propDict = [NotesHandler loadValuesfromProperties];
+    
+    //assign notes properties
+    NSString *rowKey = [propDict objectForKey:@"rowIdKey"];;
+    NSString *timestampCol = [propDict objectForKey:@"timeColName"];
+    NSString *valCol = [propDict objectForKey:@"valueColName"];
+    
     if (!notesDetailDict) {
-        [newNote setValue:@"-1" forKey:@"RowId"];
+        [newNote setValue:@"-1" forKey:rowKey];
     }
     else{
-        [newNote setValue:[notesDetailDict objectForKey:@"RowId"]  forKey:@"RowId"];
+        [newNote setValue:[notesDetailDict objectForKey:rowKey]  forKey:rowKey];
     }
-    [newNote setValue:notesDetailTextView.text forKey:@"NotesVal"];
-    [newNote setObject:dateString forKey:@"NotesTimestamp"];
+    [newNote setValue:notesDetailTextView.text forKey:valCol];
+    [newNote setObject:dateString forKey:timestampCol];
     
     if (notesDetailArray == nil) {
         notesDetailArray = [NSMutableArray alloc];
@@ -277,7 +285,7 @@
     [notesDetailArray addObject:newNote];
     
     //sort notes
-	NSSortDescriptor *notesSorter = [[NSSortDescriptor alloc] initWithKey:@"NotesTimestamp" ascending:NO selector:@selector(compare:)];
+	NSSortDescriptor *notesSorter = [[NSSortDescriptor alloc] initWithKey:timestampCol ascending:NO selector:@selector(compare:)];
 	[notesDetailArray sortUsingDescriptors:[NSArray arrayWithObject:notesSorter]];
     
     //submit notes to the server    

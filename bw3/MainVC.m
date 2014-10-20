@@ -142,15 +142,17 @@
 }
 
 - (IBAction)notes:(id)sender {
-    
 
-    NSInteger *IntNotesId = 2000283;
+   
+    //NSInteger *IntNotesId = 2000283 ;
     
     NotesHandler *notesHandlerObj = [[NotesHandler alloc] init];
     
     //[self.navigationController setViewControllers:[NSArray arrayWithObject:self]];
     
-    [notesHandlerObj loadBenjaminNotes:IntNotesId:self];
+    // send the notes cuboid id and mainVC obj to the noteshandler to bring notes functionality
+    //[notesHandlerObj loadBenjaminNotes:IntNotesId:self];
+    [notesHandlerObj loadBenjaminNotes:self];
 
 }
   

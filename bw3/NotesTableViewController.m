@@ -9,6 +9,7 @@
 #import "NotesTableViewController.h"
 #import "NotesDetailsViewController.h"
 #import "AppDelegate.h"
+#import "NotesHandler.h"
 #import "common.h"
 
 
@@ -74,6 +75,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //get notes properties
+    NSDictionary *propDict = [NotesHandler loadValuesfromProperties];
+    
+    //assign notes properties
+    NSString *timestampCol = [propDict objectForKey:@"timeColName"];
+    NSString *valCol = [propDict objectForKey:@"valueColName"];
+    
     static NSString *cellIdentifier = @"NotesCell";
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -82,7 +90,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
                                  
     }
-    cell.textLabel.text = [[self.NotesRootArray objectAtIndex:indexPath.row] objectForKey:@"NotesVal"];
+    cell.textLabel.text = [[self.NotesRootArray objectAtIndex:indexPath.row] objectForKey:valCol];
                              
     //NSDateFormatter *DateFormat = [[NSDateFormatter alloc] init];
    // NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
@@ -91,7 +99,7 @@
    // [DateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
    // //[DateFormat setFormatterBehavior:NSDateFormatterBehaviorDefault];
     
-    NSString *notesStringFormat = [[self.NotesRootArray objectAtIndex:indexPath.row] objectForKey:@"NotesTimestamp"];
+    NSString *notesStringFormat = [[self.NotesRootArray objectAtIndex:indexPath.row] objectForKey:timestampCol];
     
   //  NSDate *NotesTimestamp = [DateFormat dateFromString:notesStringFormat] ;
     

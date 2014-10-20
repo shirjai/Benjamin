@@ -22,9 +22,5 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnMsgs;
 @property (strong, nonatomic) IBOutlet UIButton *btnNotes;
 
-
-@property (strong, nonatomic) IBOutlet UIWindow *notesWindow;
-@property (strong, nonatomic) IBOutlet UINavigationController *navCtrl;
-
 /******** added by shirish 9/23/14 ends *******/
 @end

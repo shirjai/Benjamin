@@ -27,6 +27,8 @@
     return transition;
 }
 
+
+
 // returns a substring from start char to end char
 // if start char not defined, take the first char of the string
 // if end char note defined, consider the end of the string

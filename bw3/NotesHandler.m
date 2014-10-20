@@ -2,7 +2,7 @@
 //  NotesHandler.m
 //  bw3
 //
-//  Created by Sarang Kulkarni on 10/14/14.
+//  Created by Shirish Jaiswal on 10/14/14.
 //  Copyright (c) 2014 Ashish. All rights reserved.
 //
 
@@ -19,11 +19,36 @@
 int notesTableId = -1;
 Cuboid *cuboidNotes = nil;//[[Cuboid alloc] init];
 
--(void)loadBenjaminNotes:(NSInteger *)IntNotesId :(MainVC *) mainVCObj{
+NSInteger *IntNotesId;
+NSString *timestampCol;
+NSString *valCol;
+NSString *rowKey;
 
++(NSDictionary *)loadValuesfromProperties{
+    
+    NSString *propertyPath = [[NSBundle mainBundle] pathForResource:@"notesProperties" ofType:@"plist"];
+    
+    NSDictionary *propDict = [[NSDictionary alloc] initWithContentsOfFile:propertyPath];
+    
+    return propDict;
 
+}
+
+//link import notes data and load the data in Notes main view
+-(void)loadBenjaminNotes:(MainVC *) mainVCObj{
+
+    //get notes properties
+    NSDictionary *propDict = [NotesHandler loadValuesfromProperties];
+    
+    //assign notes properties
+    IntNotesId = [[propDict objectForKey:@"tableId"] integerValue];
+    rowKey = [propDict objectForKey:@"rowIdKey"];;
+    timestampCol = [propDict objectForKey:@"timeColName"];
+    valCol = [propDict objectForKey:@"valueColName"];
+    
     LinkImport *linkImportNotes = [LinkImport alloc];
     
+    //link import notes cuboid
     cuboidNotes = [linkImportNotes LinkImportApi:IntNotesId];
 
     notesTableId = [cuboidNotes GetTableId];
@@ -33,10 +58,12 @@ Cuboid *cuboidNotes = nil;//[[Cuboid alloc] init];
     
         NSMutableArray *notesRowArray =[cuboidNotes GetRow];
         NSMutableArray *notesArray = [[NSMutableArray alloc] init];
+        
+        //re-arrange data in notes format and get it in an array
         notesArray = [self loadNotesDataFromBuffer:notesRowArray];
     
-        //sort notes in desc of timestamp
-        NSSortDescriptor *notesSorter = [[NSSortDescriptor alloc] initWithKey:@"NotesTimestamp" ascending:NO selector:@selector(compare:)];
+        //sort notes in desc order of timestamp
+        NSSortDescriptor *notesSorter = [[NSSortDescriptor alloc] initWithKey:timestampCol ascending:NO selector:@selector(compare:)];
         [notesArray sortUsingDescriptors:[NSArray arrayWithObject:notesSorter]];
     
         NotesTableViewController  *ntvc = [[NotesTableViewController alloc] initWithNibName:nil bundle:nil];
@@ -65,6 +92,8 @@ Cuboid *cuboidNotes = nil;//[[Cuboid alloc] init];
     }
 }
 
+
+// rearrange cuboid data as columnName - Value pair
 -(NSMutableArray *)loadNotesDataFromBuffer:(NSMutableArray *)notesRowArray{
     
     NSMutableArray *cubmsgs = [[NSMutableArray alloc] init];
@@ -90,7 +119,7 @@ Cuboid *cuboidNotes = nil;//[[Cuboid alloc] init];
 
             NSMutableDictionary *dictmsgs = [[NSMutableDictionary alloc] init];
             numRowId = [NSNumber numberWithInt:[eachRow RowId]];
-            [dictmsgs setObject:numRowId forKey:@"RowId"];
+            [dictmsgs setObject:numRowId forKey:rowKey];
             
             for (int i=0; i <[[eachRow ColName] count];i++)
             {
@@ -100,13 +129,13 @@ Cuboid *cuboidNotes = nil;//[[Cuboid alloc] init];
                 NSLog(@"colname:%@",strColName);
                 NSLog(@"colvalue:%@",strColVal);
                 
-                if ([strColName isEqualToString:@"NotesTimestamp"])
+                if ([strColName isEqualToString:timestampCol])
                 {
-                    [dictmsgs setObject:strColVal forKey:@"NotesTimestamp"];
+                    [dictmsgs setObject:strColVal forKey:timestampCol];
                 }
-                if ([strColName isEqualToString:@"NotesVal"])
+                if ([strColName isEqualToString:valCol])
                 {
-                    [dictmsgs setObject:strColVal forKey:@"NotesVal"];
+                    [dictmsgs setObject:strColVal forKey:valCol];
                     
                 }
 
@@ -127,8 +156,8 @@ Cuboid *cuboidNotes = nil;//[[Cuboid alloc] init];
     
     Row *newRow = [[Row alloc]init];
     [newRow setRowid: [[newNote objectForKey:@"RowId"] intValue]];
-    [newRow setColumnData:@"NotesTimestamp":[newNote objectForKey:@"NotesTimestamp"]];
-    [newRow setColumnData:@"NotesVal":[newNote objectForKey:@"NotesVal"]];
+    [newRow setColumnData:timestampCol:[newNote objectForKey:timestampCol]];
+    [newRow setColumnData:valCol:[newNote objectForKey:valCol]];
     
     [submitNotesCub SetTableId:notesTableId];
     NSMutableArray *changes = [[NSMutableArray alloc] init];
