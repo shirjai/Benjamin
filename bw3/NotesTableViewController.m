@@ -75,15 +75,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //get notes properties
+    //get notes properties file
     NSDictionary *propDict = [NotesHandler loadValuesfromProperties];
     
-    //assign notes properties
+    //get notes metdata from properties
     NSString *timestampCol = [propDict objectForKey:@"timeColName"];
     NSString *valCol = [propDict objectForKey:@"valueColName"];
     
+    
     static NSString *cellIdentifier = @"NotesCell";
-
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
                                                             //forIndexPath:indexPath];
     if(cell == nil){
@@ -125,8 +125,6 @@
 
 - (IBAction)notesAddBtnPressed:(id)sender {
     
-
-
     NotesDetailsViewController *notesDetailsViewCtrl = [[NotesDetailsViewController alloc] initWithNibName:nil bundle:nil];
     
     //UINavigationController *navCtrl = [[UINavigationController alloc] initWithRootViewController:notesDetailsViewCtrl];

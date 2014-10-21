@@ -250,7 +250,7 @@
     [DateFormat setLocale:posix];
     
     [DateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
-    NSString *dateString = [DateFormat stringFromDate:[NSDate date]];
+    NSString *strNoteTimestamp = [DateFormat stringFromDate:[NSDate date]];
      //[DateFormat setFormatterBehavior:NSDateFormatterBehaviorDefault];
     NSMutableDictionary *newNote = [[NSMutableDictionary alloc] init];
     
@@ -269,7 +269,7 @@
         [newNote setValue:[notesDetailDict objectForKey:rowKey]  forKey:rowKey];
     }
     [newNote setValue:notesDetailTextView.text forKey:valCol];
-    [newNote setObject:dateString forKey:timestampCol];
+    [newNote setObject:strNoteTimestamp forKey:timestampCol];
     
     if (notesDetailArray == nil) {
         notesDetailArray = [NSMutableArray alloc];
@@ -289,11 +289,12 @@
 	[notesDetailArray sortUsingDescriptors:[NSArray arrayWithObject:notesSorter]];
     
     //submit notes to the server    
-    [NotesHandler submitNotes:newNote];
+    [NotesHandler submitNotes :newNote];
     
     //set the title for new note or modify the title if changed
     NSString *currentNoteTitle = self.navigationItem.title;
     NSString *newNoteTitle = [common getSubstring:notesDetailTextView.text defineStartChar:@"" defineEndChar:@"\n"];
+    
     if (![currentNoteTitle isEqualToString:newNoteTitle]) {
         self.navigationItem.title = newNoteTitle;
 
