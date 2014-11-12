@@ -15,11 +15,9 @@
 /******** added by shirish 9/23/14 starts *******/
 #import "viewMsgs.h"
 #import "NotesHandler.h"
-
+#import "watchHandler.h"
 /******** added by shirish 9/23/14 ends *******/
 
-////temp
-//#import "NotesTableViewController.h"
 
 @interface MainVC ()
 
@@ -152,5 +150,15 @@
     [notesHandlerObj loadBenjaminNotes:self];
 
 }
+
+- (IBAction)wtch:(id)sender {
+    
+      watchHandler *watchHandlerObj = [[watchHandler alloc] init];
+          
+     // send the mainVC obj to the noteshandler to launch notes module
+     [watchHandlerObj loadBenjaminWatch:self];
+}
+
   
+
 @end

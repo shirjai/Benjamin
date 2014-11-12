@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="btnMsgs" destination="eqZ-5u-BWW" id="skp-b4-OtH"/>
                 <outlet property="btnNotes" destination="Ae5-tK-H2P" id="KD7-U4-RTp"/>
+                <outlet property="btnWtch" destination="rm0-go-5zY" id="oiC-pP-VXm"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -77,6 +78,16 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rm0-go-5zY">
+                    <rect key="frame" x="10" y="126" width="73" height="61"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="beos_eyeball.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="wtch:" destination="-1" eventType="touchUpInside" id="FQn-nN-0cU"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -90,6 +101,7 @@
         </view>
     </objects>
     <resources>
+        <image name="beos_eyeball.png" width="128" height="128"/>
         <image name="chat_icon.png" width="256" height="256"/>
         <image name="notes.png" width="256" height="256"/>
         <image name="workbook.png" width="128" height="128"/>

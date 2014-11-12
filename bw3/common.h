@@ -13,4 +13,6 @@
 +(CATransition *)getViewTransistionStylePageCurl;
 +(NSString *)getSubstring:(NSString *)stringParam defineStartChar:(NSString *)start defineEndChar:(NSString *)end;
 
++(NSMutableArray *)prepareDataFromBuffer:(NSMutableArray *)mutarrCubRows ColNames:(NSArray *)arrSelColNames RowIdCol:(NSString *)rowIdColName;
+
 @end

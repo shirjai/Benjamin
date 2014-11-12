@@ -7,6 +7,7 @@
 //
 
 #import "common.h"
+#import "Row.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation common
@@ -56,4 +57,55 @@
     return subString;
 }
 
+// rearrange cuboid data as columnName - Value pair
++(NSMutableArray *)prepareDataFromBuffer:(NSMutableArray *)mutarrCubRows ColNames:(NSArray *)arrSelColNames RowIdCol:(NSString *)rowIdColName{
+    
+    NSMutableArray *mutarrKeyValData = [[NSMutableArray alloc] init];
+    
+    NSLog(@"Inside prepareDateFromBuffer");
+    if (![mutarrCubRows count]) {
+        
+        NSLog(@"No changes or new rows from the server");
+        
+    }
+    else{
+        NSString *strColName = nil;
+        NSString *strColVal = nil;
+        NSNumber *numRowId = nil;
+        Row *eachRow = nil;
+        int irowCnt = 0;
+        
+        //for (Row *eachRow in msgRowArray)
+        for ( irowCnt = irowCnt;  irowCnt < [mutarrCubRows count];irowCnt++)
+        {
+            eachRow = mutarrCubRows[irowCnt];
+            NSLog(@"eachRow:%@",eachRow);
+            NSLog(@"Rowid:%d",[eachRow RowId]);
+            
+            NSMutableDictionary *mutdictCubData = [[NSMutableDictionary alloc] init];
+            numRowId = [NSNumber numberWithInt:[eachRow RowId]];
+            [mutdictCubData setObject:numRowId forKey:rowIdColName];
+            
+            for (int i=0; i <[[eachRow ColName] count];i++)
+            {
+                
+                strColName = [[eachRow ColName] objectAtIndex:i];
+                strColVal = [[eachRow Value] objectAtIndex:i];
+                
+                NSLog(@"colname:%@",strColName);
+                NSLog(@"colvalue:%@",strColVal);
+                
+                if ([arrSelColNames containsObject:strColName])
+                {
+                    [mutdictCubData setObject:strColVal forKey:strColName];
+                }
+                
+            }
+            //[cubmsgs addObject:msgElement];
+            [mutarrKeyValData addObject:mutdictCubData];
+        }
+    }
+    return mutarrKeyValData;
+    
+}
 @end

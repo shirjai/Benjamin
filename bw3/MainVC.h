@@ -18,9 +18,14 @@
 /******** added by shirish 9/23/14 starts *******/
 - (IBAction)msgs:(id)sender;
 - (IBAction)notes:(id)sender;
+- (IBAction)wtch:(id)sender;
+
 
 @property (strong, nonatomic) IBOutlet UIButton *btnMsgs;
 @property (strong, nonatomic) IBOutlet UIButton *btnNotes;
+@property (strong, nonatomic) IBOutlet UIButton *btnWtch;
+
+
 
 /******** added by shirish 9/23/14 ends *******/
 @end
