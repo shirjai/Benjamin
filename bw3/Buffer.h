@@ -27,4 +27,8 @@
 -(NSString *) GetBufferSubmit:(Cuboid *) cub;
 -(Cuboid *) ExtractResponseSubmit:(NSString *) ResBuffer:(Cuboid *) cub;
 
+/***** start: ondemand linkImport buffer added by shirish on 11/13/14*****/
+-(NSString *)GetBufferLinkImportOnDemand:(NSInteger *)TableID onDemandParam:(NSString *)query;
+/***** end: ondemand linkImport buffer added by shirish on 11/13/14*****/
+
 @end

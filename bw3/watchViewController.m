@@ -14,11 +14,14 @@
 // import the custom layout
 #import "watchCellViewLayout.h"
 
-@interface watchViewController ()
+
+@interface watchViewController ()<UICollectionViewDelegate, UICollectionViewDataSource//>
+,UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *watchCollectionView;
 
 @property (strong, nonatomic) IBOutlet watchCellViewLayout *cellViewLayout;
+
 
 
 @end
@@ -31,7 +34,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title = @"Watch";
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_bwt.png"]];
     }
     return self;
 }
@@ -41,58 +45,33 @@
 {
     [super viewDidLoad];
     
- /*
-    watchArray = [[NSMutableArray alloc]init];
-    
-    watchArray = @[@[@"cell  1",@"cell 2 ",@"cell3  "],
-                   @[@"cell14",@"cell15",@"cell16"],
-                   @[@"cell17",@"cell18",@"cell19"],
-                   @[@"cell20",@"cell21",@"cell22"],
-                   @[@"cell23",@"cell24",@"cell25"],
-                   @[@"cell26",@"",@""]];
-    
-   [watchArray addObject:@"cell11"];
-    [watchArray addObject:@"cell12"];
-    [watchArray addObject:@"cell13"];
-    
-    [watchArray addObject:@"cell14"];
-    [watchArray addObject:@"cell15"];
-    [watchArray addObject:@"cell16"];
-
-    [watchArray addObject:@"cell17"];
-    [watchArray addObject:@"cell18"];
-    [watchArray addObject:@"cell19"];
-    
-    [watchArray addObject:@"cell20"];
-    [watchArray addObject:@"cell21"];
-    [watchArray addObject:@"cell22"];
-    
-    [watchArray addObject:@"cell23"]; */
-    
-    
     // Do any additional setup after loading the view from its nib.
+    
+ 
+    
+    
+    // Configure layout
+    //UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    //[flowLayout setItemSize:CGSizeMake(150, 55)];
+    //[flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    //[self.watchCollectionView setCollectionViewLayout:flowLayout];
+
     
     [self.watchCollectionView registerClass:[watchCellViewController class] forCellWithReuseIdentifier:@"watchCell"];
     
     
-    // Configure layout
- /*   UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setItemSize:CGSizeMake(200, 200)];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    [self.watchCollectionView setCollectionViewLayout:flowLayout];
-  */
 }
 
-/*
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	
-    //[[self navigationController] setNavigationBarHidden:NO animated:NO];
+    [[self navigationController] setNavigationBarHidden:NO animated:NO];
 	// important to reload data when view is redrawn
     [self.watchCollectionView reloadItemsAtIndexPaths:[self.watchCollectionView indexPathsForVisibleItems]];
 	[self.watchCollectionView reloadData];
 }
-*/
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -109,6 +88,7 @@
     //return 30;//[watchArray count];
 }
 
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     NSLog(@"[watchArray[section] count]:%d",[watchArray[section] count]);
@@ -116,47 +96,51 @@
     //return 3;//[watchMasterArray count];
 }
 
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    //UILabel *label = (UILabel *)[cell viewWithTag:100];
-    //NSArray *dataArray = [watchMasterArray objectAtIndex:indexPath.section];
+    watchCellViewController *cell = (watchCellViewController *)[collectionView dequeueReusableCellWithReuseIdentifier:@"watchCell" forIndexPath:indexPath];
     
-    
-     watchCellViewController *cell = (watchCellViewController *)[collectionView dequeueReusableCellWithReuseIdentifier:@"watchCell" forIndexPath:indexPath];
-    
-    NSLog(@"indexPath.section->%d",indexPath.section);
-    
-   // if (indexPath.section < [watchArray count]) {
-    NSLog(@"cellValue at Row %d",indexPath.row);
-    //[cell.cellLabel  setText:[watchArray objectAtIndex:indexPath.section]];
-    
+   cell.cellLabel.frame=CGRectMake(12, 13, 76, 0);
     
     cell.cellLabel.text=watchArray[indexPath.section][indexPath.row];
-    //[cell.cellLabel  setText:[NSString stringWithFormat:@"%d%d",indexPath.section, indexPath.row]];
-   //[cell.cellLabel  setText:[NSString stringWithFormat:@"%d",indexPath.section]];
-   // }
+    
+    NSLog(@"cellValue at Section%d Row%d = %@",indexPath.section,indexPath.row, cell.cellLabel.text);
+    
+    [cell.layer setBorderWidth:1.0f];
+    [cell.layer setBorderColor:[UIColor blackColor].CGColor];
     
     
-   // [cell.layer setBorderWidth:2.0f];
-   // [cell.layer setBorderColor:[UIColor whiteColor].CGColor];
-   
+    cell.cellLabel.lineBreakMode=NSLineBreakByWordWrapping;
+    //cell.cellLabel.preferredMaxLayoutWidth = CGRectGetWidth(collectionView.bounds);
+    [cell.cellLabel  setNumberOfLines:0];
     
+    //CGSize textSize=CGSizeMake(100, 100);
+    
+    //textSize = [watchArray[indexPath.section][indexPath.row] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0f]}];
+    
+    //[cell.cellLabel sizeThatFits:textSize];
+    
+    [cell.cellLabel sizeToFit];
     
     return cell;
 }
 
+
+
 #pragma mark – UICollectionViewDelegateFlowLayout
 
-
-
-
-
-
-
-
-
-
-
+/*
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //NSString *cellData = watchArray[indexPath.section][indexPath.row];
+    
+  //  return [watchArray[indexPath.section][indexPath.row] sizeWithAttributes:nil];
+    
+    return CGSizeMake(100, 100);
+    
+} */
+    
 
 
 @end

@@ -54,7 +54,6 @@
 }
 
 
-
 //linkImport buffer
 -(NSString *)GetBufferLinkImport:(NSInteger *)TableID
 {
@@ -75,6 +74,30 @@
     NSLog(@"BufferLI = %@" ,buffer);
     return buffer;
 }
+
+/***** start: ondemand linkImport buffer added by shirish on 11/13/14*****/
+-(NSString *)GetBufferLinkImportOnDemand:(NSInteger *)TableID onDemandParam:(NSString *)query
+{
+    //get saved information from DB
+    Database *db =[Database alloc];
+    [db getPropertiesFile];
+    NSString *UserID = [db GetPropertyValue:@"UserId"];
+    NSString *UserName = [db GetPropertyValue:@"UserName"];
+    NSString *UserPass = [db GetPropertyValue:@"UserPass"];
+    NSString *MemberId = [db GetPropertyValue:@"MemberId"];
+    NSString *NhId = [db GetPropertyValue:@"NhId"];
+    
+    NSString *TblId = [NSString stringWithFormat: @"%ld",TableID];
+    query = [NSString stringWithFormat:@"%@%@", query,
+             UserName];
+    
+    NSString *seperator;
+    seperator = [NSString stringWithFormat:@"%c",1];
+    NSString *buffer = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@-1%@%@%@0",UserID,seperator,UserName,seperator,UserPass,seperator,MemberId,seperator,NhId,seperator,TblId,seperator,seperator,query,seperator];
+    NSLog(@"BufferLI = %@" ,buffer);
+    return buffer;
+}
+/***** end: ondemand linkImport buffer added by shirish on 11/13/14*****/
 
 
 -(BwCuboid *)ExtractResponseLinkImport:(NSString *)ResBuffer

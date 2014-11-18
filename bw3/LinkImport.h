@@ -13,5 +13,6 @@
 @interface LinkImport : NSObject
 
 -(Cuboid *)LinkImportApi:(NSInteger*) TableId;
+-(Cuboid*)LinkImportApiOnDemand:(NSInteger *)TableId onDemandParam:(NSString *)query;
 
 @end

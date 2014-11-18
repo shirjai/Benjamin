@@ -46,9 +46,9 @@ static NSString * const cellWatch = @"cellWatch";
 
 - (void)setup
 {
-    self.itemInsets = UIEdgeInsetsMake(22.0f, 10.0f, 13.0f, 10.0f);
-    self.itemSize = CGSizeMake(98.0f, 50.0f);
-    self.interItemSpacingY = 1.0f;
+    self.itemInsets = UIEdgeInsetsMake(0.0f, 0.0f, 13.0f, 0.0f);
+    self.itemSize = CGSizeMake(106.0f, 100.0f);
+    self.interItemSpacingY = 0.0f;
     self.numberOfColumns = 3;//[self.collectionView numberOfItemsInSection:section] ;//3;
   
 }
@@ -91,7 +91,6 @@ static NSString * const cellWatch = @"cellWatch";
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
     NSMutableArray *allAttributes = [NSMutableArray arrayWithCapacity:self.layoutInfo.count];
-    
     [self.layoutInfo enumerateKeysAndObjectsUsingBlock:^(NSString *elementIdentifier,
                                                          NSDictionary *elementsInfo,
                                                          BOOL *stop) 
@@ -128,8 +127,8 @@ static NSString * const cellWatch = @"cellWatch";
     return CGSizeMake(self.collectionView.bounds.size.width, height);
 }
 
-#pragma mark - Private
 
+#pragma mark - Private
 
 - (CGRect)frameForCellWatchAtIndexPath:(NSIndexPath *)indexPath
 {

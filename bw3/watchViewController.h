@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface watchViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
-//,UICollectionViewDelegateFlowLayout>
+@interface watchViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource
+,UICollectionViewDelegateFlowLayout>
+
 @property (strong, nonatomic) NSMutableArray *watchArray;
 
 @end

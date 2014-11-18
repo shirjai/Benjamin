@@ -15,4 +15,6 @@
 
 +(NSMutableArray *)prepareDataFromBuffer:(NSMutableArray *)mutarrCubRows ColNames:(NSArray *)arrSelColNames RowIdCol:(NSString *)rowIdColName;
 
++(NSString *) dateFromExcelSerialDate:(double) serialdate;
+
 @end

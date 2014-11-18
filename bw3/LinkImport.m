@@ -35,4 +35,25 @@
     return CUB;
 }
 
+/***** added by shirish for ondemand linkImport API 11/13/14 *****/
+-(Cuboid*)LinkImportApiOnDemand:(NSInteger *)TableId onDemandParam:(NSString *)query
+{
+    Buffer *Buff = [Buffer alloc];
+    NSString *CallBuff = [Buff GetBufferLinkImportOnDemand:TableId onDemandParam:query];
+    
+    
+    //connect to server and link import the cuboid
+    Http *CallBrwalk = [[Http alloc]init];
+    NSString *Res;
+    Res = [CallBrwalk callBoardwalk:CallBuff:@"xlLinkImportService"];
+    BwCuboid *CuboidSer = [Buff ExtractResponseLinkImport:Res];
+    Database *Db = [[Database alloc] init];
+    [Db writeCuboid:CuboidSer];
+    
+    Cuboid *CUB = [[Cuboid alloc] init];
+    
+    [CUB SetCuboid:CuboidSer];
+    
+    return CUB;
+}
 @end

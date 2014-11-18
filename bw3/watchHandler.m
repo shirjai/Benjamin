@@ -25,11 +25,15 @@
     NSString *strTagColName = @"Tag Name";//[propDict objectForKey:@"timeColName"];
     NSString *strValColName = @"Value";// valCol = [propDict objectForKey:@"valueColName"];
     NSString *strTimeColName = @"Timestamp";// valCol = [propDict objectForKey:@"valueColName"];
+    NSString *strOnDemandParam = @"?UserId=";
     
     LinkImport *linkImportWatch = [LinkImport alloc];
     
     //link import notes cuboid
-    Cuboid *cuboidTagVal = [linkImportWatch LinkImportApi:intWatchTagValId];
+    //Cuboid *cuboidTagVal = [linkImportWatch LinkImportApi:intWatchTagValId];
+    
+    // ondemand link import cuboid
+    Cuboid *cuboidTagVal = [linkImportWatch LinkImportApiOnDemand:intWatchTagValId onDemandParam:strOnDemandParam];
     
     int TagValTableId = [cuboidTagVal GetTableId];
     if ( TagValTableId != 0)
@@ -43,8 +47,6 @@
         //re-arrange data in notes format and get it in an array
         mutarrTagVal = [common prepareDataFromBuffer:mutarrRowTagVal ColNames:arrSelColNames RowIdCol:rowColName];
   
-    
-        watchViewController  *watchVC = [[watchViewController alloc] initWithNibName:nil bundle:nil];
         
         NSMutableArray *watchRowArray = [[NSMutableArray alloc]init];
         
@@ -79,7 +81,10 @@
 
                 predicate = [NSPredicate predicateWithFormat:@"(%@ == %@)", strTimeColName, key];
                 if([predicate evaluateWithObject:mutdictRow])
+                {
                     col3 = [mutdictRow valueForKey:key];
+                    col3 = [common dateFromExcelSerialDate:[col3 doubleValue]];
+                }
             }
             
             [arrRow addObject:col1];
@@ -88,6 +93,7 @@
             [watchRowArray addObject:arrRow];
         }
         
+        watchViewController  *watchVC = [[watchViewController alloc] initWithNibName:nil bundle:nil];
 
         watchVC.watchArray   = [[NSMutableArray alloc]init];
     
@@ -103,7 +109,7 @@
     
         appDelegate.window.rootViewController = watchNavCtrl;
     
-        [appDelegate.window makeKeyAndVisible];
+        //[appDelegate.window makeKeyAndVisible];
     
         NSLog(@"%@",mainVCObj.navigationController);
         
