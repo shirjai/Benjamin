@@ -35,7 +35,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Watch";
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_bwt.png"]];
+
     }
     return self;
 }
@@ -43,10 +43,13 @@
 
 - (void)viewDidLoad
 {
+    
+  //  [self.watchCollectionView setCollectionViewLayout:[[watchCellViewLayout alloc]init]];
+    
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view from its nib.
-    
+    //[self.watchCollectionView reloadData];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_bwt.png"]];
  
     
     

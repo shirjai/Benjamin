@@ -7,10 +7,9 @@
 //
 
 #import "watchCellViewLayout.h"
-
 #import "watchCellViewController.h"
-
 #import "watchViewController.h"
+#import "colHeaderFormat.h"
 
 static NSString * const cellWatch = @"cellWatch";
 
@@ -29,6 +28,7 @@ static NSString * const cellWatch = @"cellWatch";
     self = [super init];
     if (self) {
         [self setup];
+
     }
     
     return self;
@@ -39,6 +39,7 @@ static NSString * const cellWatch = @"cellWatch";
     self = [super init];
     if (self) {
         [self setup];
+        [self registerClass:[colHeaderFormat class] forDecorationViewOfKind:[colHeaderFormat kind]];
     }
     
     return self;
@@ -101,13 +102,56 @@ static NSString * const cellWatch = @"cellWatch";
         {
             if (CGRectIntersectsRect(rect, attributes.frame)) 
             {
+                
+                //UICollectionViewLayoutAttributes *attributesin = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:[colHeaderFormat kind] withIndexPath:indexPath];
+                //if (indexPath.section == 0)
+                //{
+                 //   attributesin.frame = attributes.frame;
+                  //  attributesin.zIndex = 0;
+                //}
+                
                 [allAttributes addObject:attributes];
             }
         }];
     }];
     
     return allAttributes;
+    
+/*    NSArray *array = [super layoutAttributesForElementsInRect:rect];
+    NSMutableArray *newArray = [array mutableCopy];
+    
+    [self.layoutInfo enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if (CGRectIntersectsRect([obj CGRectValue], rect))
+        {
+            UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:[colHeaderFormat kind] withIndexPath:key];
+            attributes.frame = [obj CGRectValue];
+            attributes.zIndex = 0;
+            //attributes.alpha = 0.5; // screenshots
+            [newArray addObject:attributes];
+        }
+    }];
+    
+    array = [NSArray arrayWithArray:newArray];
+    
+    return array; */
 }
+/*
+
+// layout attributes for a specific decoration view
+- (UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString *)decorationViewKind atIndexPath:(NSIndexPath *)indexPath
+{
+    id hdrRect = self.layoutInfo[indexPath];
+    if (!hdrRect)
+        return nil; // no shelf at this index (this is probably an error)
+    
+    UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:[colHeaderFormat kind] withIndexPath:indexPath];
+    
+    attributes.frame = [hdrRect CGRectValue];
+    attributes.zIndex = 0; // shelves go behind other views
+
+    return attributes;
+} */
+
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
