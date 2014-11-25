@@ -44,7 +44,7 @@
         NSMutableArray *mutarrTagVal = [[NSMutableArray alloc] init];
         NSArray *arrSelColNames = [NSArray arrayWithObjects: strTagColName, strValColName, strTimeColName, nil];
         
-        //re-arrange data in notes format and get it in an array
+        //re-arrange data in watch format and get it in an array
         mutarrTagVal = [common prepareDataFromBuffer:mutarrRowTagVal ColNames:arrSelColNames RowIdCol:rowColName];
   
         
@@ -60,7 +60,7 @@
         [watchArray insertObjects:arrSelColNames atIndexes:indexes]; */
         
         // add data
-        
+         NSLog(@"Adding data to array for display");
         NSPredicate *predicate = nil;
         NSString *col1 = nil;
         NSString *col2 = nil;
@@ -93,34 +93,43 @@
             [watchRowArray addObject:arrRow];
         }
         
-        watchViewController  *watchVC = [[watchViewController alloc] initWithNibName:nil bundle:nil];
+        NSLog(@"Initialize watchViewController");
+        
+        watchViewController  *watchVC = [[watchViewController alloc] initWithNibName:@"watchViewController" bundle:nil];
 
+        NSLog(@"Add data to Array of watchViewController for display");
         watchVC.watchArray   = [[NSMutableArray alloc]init];
     
        [[watchVC watchArray] addObjectsFromArray:watchRowArray];
         
-        AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         
-        
+        NSLog(@"Initialize navigationcontroller");
         UINavigationController *watchNavCtrl = [[UINavigationController alloc] initWithRootViewController:watchVC];
-        
+         
+        NSLog(@"Set viewcontroller for navigationcontroller");
         [watchNavCtrl setViewControllers:[NSArray arrayWithObject:mainVCObj]];
     
-    
+        NSLog(@"Initialize appdelegate");
+        AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+
+        NSLog(@"Set rootviewcontroller in appdelegate");
+            
         appDelegate.window.rootViewController = watchNavCtrl;
     
-        //[appDelegate.window makeKeyAndVisible];
+        [appDelegate.window makeKeyAndVisible];
     
-        NSLog(@"%@",mainVCObj.navigationController);
+        NSLog(@"Push watchviewcontroller to current view ");
         
         [mainVCObj.navigationController pushViewController:watchVC animated:YES];
         
-        NSLog(@"%@",mainVCObj.navigationController);
+        NSLog(@"Code block loadBenjaminWatch ends");
   
     }
     else{
         NSLog(@"No data returned from server");
     }
 }
+
+
 
 @end

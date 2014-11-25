@@ -15,7 +15,6 @@
 		8A120E4C1A0D1CF20078A58C /* watchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A120E491A0D1CF20078A58C /* watchViewController.m */; };
 		8A1934C11A1392830030F380 /* bwtlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1934C01A1392830030F380 /* bwtlogo.png */; };
 		8A1934C31A1395DF0030F380 /* bg_bwt.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1934C21A1395DF0030F380 /* bg_bwt.png */; };
-		8A1934C51A14CCBA0030F380 /* bg_watch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A1934C41A14CCBA0030F380 /* bg_watch.xib */; };
 		8A54624A198150A0007BAEDA /* TableViewCellMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A546249198150A0007BAEDA /* TableViewCellMessages.m */; };
 		8A8EF8BB1979596200A2C2C6 /* viewMsgs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A8EF8BA1979596200A2C2C6 /* viewMsgs.xib */; };
 		8A9DAB391A1B4CA1001130A7 /* colHeaderFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9DAB381A1B4CA1001130A7 /* colHeaderFormat.m */; };
@@ -84,7 +83,6 @@
 		8A120E4A1A0D1CF20078A58C /* watchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = watchViewController.h; sourceTree = "<group>"; };
 		8A1934C01A1392830030F380 /* bwtlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bwtlogo.png; sourceTree = "<group>"; };
 		8A1934C21A1395DF0030F380 /* bg_bwt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_bwt.png; sourceTree = "<group>"; };
-		8A1934C41A14CCBA0030F380 /* bg_watch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = bg_watch.xib; sourceTree = "<group>"; };
 		8A546248198150A0007BAEDA /* TableViewCellMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellMessages.h; sourceTree = "<group>"; };
 		8A546249198150A0007BAEDA /* TableViewCellMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellMessages.m; sourceTree = "<group>"; };
 		8A8EF8BA1979596200A2C2C6 /* viewMsgs.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = viewMsgs.xib; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 				8A120E3C1A0CC6BD0078A58C /* watchCellViewLayout.m */,
 				8A120E421A0CC8790078A58C /* watchHandler.h */,
 				8A120E431A0CC8790078A58C /* watchHandler.m */,
-				8A1934C41A14CCBA0030F380 /* bg_watch.xib */,
 				8A9DAB371A1B4CA1001130A7 /* colHeaderFormat.h */,
 				8A9DAB381A1B4CA1001130A7 /* colHeaderFormat.m */,
 			);
@@ -465,7 +462,6 @@
 				ACDBF611190EEFF8001FF4ED /* Default.png in Resources */,
 				ACDBF613190EEFF8001FF4ED /* Default@2x.png in Resources */,
 				ACDBF615190EEFF8001FF4ED /* Default-568h@2x.png in Resources */,
-				8A1934C51A14CCBA0030F380 /* bg_watch.xib in Resources */,
 				ACDBF61B190EEFF8001FF4ED /* ViewController.xib in Resources */,
 				8AFCD10619BF36A500A275EC /* chat_icon.png in Resources */,
 				8A1934C11A1392830030F380 /* bwtlogo.png in Resources */,

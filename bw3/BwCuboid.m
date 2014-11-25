@@ -25,7 +25,9 @@
     NSArray *ColumnIds;
     NSArray *ColumnNames;
     NSArray *Cells;
-    
+    /** added by shirish for new rows on refresh 11/24/14 **/
+    NSArray *newRows;
+    /** added by shirish for new rows on refresh 11/24/14**/
 }
 
 //-----
@@ -182,4 +184,15 @@
     return Cells;
 }
 
+/** added by shirish for new rows on refresh 11/24/14 **/
+-(void)setNewRows:(NSArray *) newRowsParam
+{
+    newRows = newRowsParam;
+}
+
+-(NSArray *)getNewRows
+{
+    return newRows;
+}
+/** added by shirish for new rows on refresh 11/24/14 **/
 @end

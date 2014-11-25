@@ -21,8 +21,9 @@
         self.autoresizesSubviews = YES;
         self.cellLabel.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
                                        UIViewAutoresizingFlexibleHeight);
+        
         //self.cellLabel.font = [UIFont boldSystemFontOfSize:42];
-        self.cellLabel.textAlignment = NSTextAlignmentCenter;
+       // self.cellLabel.textAlignment = NSTextAlignmentCenter;
         //self.cellLabel.adjustsFontSizeToFitWidth = YES;
         
         [self addSubview:self.cellLabel];

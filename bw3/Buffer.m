@@ -313,6 +313,9 @@
         
     }
     
+    /** added by shirish for new rows on refresh 11/24/14 **/
+    // get new rows
+    NSArray *newRowsArr = [[resParts objectAtIndex:2] componentsSeparatedByString:seperator];
     
     return BWC;
     

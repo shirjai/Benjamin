@@ -53,7 +53,12 @@
 -(void)SetCells:(NSArray *) Cell;
 -(NSArray *)GetCells;
 
+/** added by shirish for new rows on refresh 11/24/14 **/
 
+-(void)setNewRows:(NSArray *) newRowsParam;
+-(NSArray *)getNewRows;
+
+/** added by shirish for new rows on refresh 11/24/14 **/
 @end
 
 

@@ -79,8 +79,8 @@
         for ( irowCnt = irowCnt;  irowCnt < [mutarrCubRows count];irowCnt++)
         {
             eachRow = mutarrCubRows[irowCnt];
-            NSLog(@"eachRow:%@",eachRow);
-            NSLog(@"Rowid:%d",[eachRow RowId]);
+           // NSLog(@"eachRow:%@",eachRow);
+           // NSLog(@"Rowid:%d",[eachRow RowId]);
             
             NSMutableDictionary *mutdictCubData = [[NSMutableDictionary alloc] init];
             numRowId = [NSNumber numberWithInt:[eachRow RowId]];
@@ -92,8 +92,8 @@
                 strColName = [[eachRow ColName] objectAtIndex:i];
                 strColVal = [[eachRow Value] objectAtIndex:i];
                 
-                NSLog(@"colname:%@",strColName);
-                NSLog(@"colvalue:%@",strColVal);
+                //NSLog(@"colname:%@",strColName);
+                //NSLog(@"colvalue:%@",strColVal);
                 
                 if ([arrSelColNames containsObject:strColName])
                 {

@@ -39,7 +39,7 @@ static NSString * const cellWatch = @"cellWatch";
     self = [super init];
     if (self) {
         [self setup];
-        [self registerClass:[colHeaderFormat class] forDecorationViewOfKind:[colHeaderFormat kind]];
+
     }
     
     return self;
@@ -51,7 +51,7 @@ static NSString * const cellWatch = @"cellWatch";
     self.itemSize = CGSizeMake(106.0f, 100.0f);
     self.interItemSpacingY = 0.0f;
     self.numberOfColumns = 3;//[self.collectionView numberOfItemsInSection:section] ;//3;
-  
+    [self registerClass:[colHeaderFormat class] forDecorationViewOfKind:[colHeaderFormat kind]];
 }
 
 #pragma mark - Layout
@@ -88,10 +88,50 @@ static NSString * const cellWatch = @"cellWatch";
 }
 
 
-
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
+    NSMutableArray *attributes = [self layoutAttributesForElementsInRect_old:rect];
+    
+    NSMutableArray *allAttributes = [NSMutableArray arrayWithArray:attributes];
+    
+    //NSMutableArray *allAttributes = [NSMutableArray arrayWithArray:attributes];
+
+    
+    for (UICollectionViewLayoutAttributes *attribute in attributes) {
+        
+        // Look for the first item in a row
+        if (attribute.representedElementKind == UICollectionElementCategoryCell
+            && attribute.frame.origin.x == self.itemInsets.left) {
+            
+            // Create decoration attributes
+            UICollectionViewLayoutAttributes *decorationAttributes =
+            [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:[colHeaderFormat kind] withIndexPath:attribute.indexPath];
+            
+            // Make the decoration view span the entire row (you can do item by item as well.  I just chose to do it this way)
+            if (attribute.indexPath.section == 0) {
+                decorationAttributes.frame =CGRectMake(0,attribute.frame.origin.y-(self.itemInsets.top),self.collectionViewContentSize.width,self.itemSize.height);//+(self.itemInsets.top+self.itemInsets.bottom));
+                
+                // Set the zIndex to be behind the item
+                decorationAttributes.zIndex = attribute.zIndex-1;
+                
+                // Add the attribute to the list
+                [allAttributes addObject:decorationAttributes];
+            }
+            
+
+            
+        }
+        
+    }
+    
+    return allAttributes;
+    
+}
+
+- (NSMutableArray *)layoutAttributesForElementsInRect_old:(CGRect)rect
+{
     NSMutableArray *allAttributes = [NSMutableArray arrayWithCapacity:self.layoutInfo.count];
+    
     [self.layoutInfo enumerateKeysAndObjectsUsingBlock:^(NSString *elementIdentifier,
                                                          NSDictionary *elementsInfo,
                                                          BOOL *stop) 
@@ -102,40 +142,15 @@ static NSString * const cellWatch = @"cellWatch";
         {
             if (CGRectIntersectsRect(rect, attributes.frame)) 
             {
-                
-                //UICollectionViewLayoutAttributes *attributesin = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:[colHeaderFormat kind] withIndexPath:indexPath];
-                //if (indexPath.section == 0)
-                //{
-                 //   attributesin.frame = attributes.frame;
-                  //  attributesin.zIndex = 0;
-                //}
-                
                 [allAttributes addObject:attributes];
             }
         }];
     }];
     
     return allAttributes;
-    
-/*    NSArray *array = [super layoutAttributesForElementsInRect:rect];
-    NSMutableArray *newArray = [array mutableCopy];
-    
-    [self.layoutInfo enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        if (CGRectIntersectsRect([obj CGRectValue], rect))
-        {
-            UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:[colHeaderFormat kind] withIndexPath:key];
-            attributes.frame = [obj CGRectValue];
-            attributes.zIndex = 0;
-            //attributes.alpha = 0.5; // screenshots
-            [newArray addObject:attributes];
-        }
-    }];
-    
-    array = [NSArray arrayWithArray:newArray];
-    
-    return array; */
+
 }
-/*
+
 
 // layout attributes for a specific decoration view
 - (UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString *)decorationViewKind atIndexPath:(NSIndexPath *)indexPath
@@ -145,12 +160,13 @@ static NSString * const cellWatch = @"cellWatch";
         return nil; // no shelf at this index (this is probably an error)
     
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:[colHeaderFormat kind] withIndexPath:indexPath];
-    
-    attributes.frame = [hdrRect CGRectValue];
-    attributes.zIndex = 0; // shelves go behind other views
+        attributes.frame = [hdrRect CGRectValue];
+        attributes.zIndex = 0; // shelves go behind other views
+
+
 
     return attributes;
-} */
+}
 
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -160,12 +176,22 @@ static NSString * const cellWatch = @"cellWatch";
 
 - (CGSize)collectionViewContentSize
 {
-    NSInteger rowCount = [self.collectionView numberOfSections] / self.numberOfColumns;
+   /* NSInteger rowCount = [self.collectionView numberOfSections] / self.numberOfColumns;
     // make sure we count another row if one is only partially filled
-    if ([self.collectionView numberOfSections] % self.numberOfColumns) rowCount++;
+    if ([self.collectionView numberOfSections] % self.numberOfColumns)
+        rowCount++;
     
     CGFloat height = self.itemInsets.top +
     (rowCount + 2) * self.itemSize.height + (rowCount - 1) * self.interItemSpacingY +
+    self.itemInsets.bottom; */
+    
+    NSInteger rowCount = [self.collectionView numberOfSections];// / self.numberOfColumns;
+    // make sure we count another row if one is only partially filled
+    //if ([self.collectionView numberOfSections] % self.numberOfColumns)
+    //    rowCount++;
+    
+    CGFloat height = self.itemInsets.top +
+    rowCount * self.itemSize.height + (rowCount - 1) * self.interItemSpacingY +
     self.itemInsets.bottom;
     
     return CGSizeMake(self.collectionView.bounds.size.width, height);
@@ -180,22 +206,39 @@ static NSString * const cellWatch = @"cellWatch";
    // NSInteger column = indexPath.section % self.numberOfColumns;
      NSInteger row = indexPath.section;
      NSInteger column = indexPath.item;
+    float cellWidth = self.itemSize.width;
+   /*
+    if (column == 0)
+        cellWidth -= 10;
+    if (column == 1)
+        cellWidth -= 30;
+    if (column == 2)
+        cellWidth += 18;
+    */
+    /*
+   NSLog(@"***Calculating cell size** ");
+    NSLog(@"self.collectionView.bounds.size.width=%f",self.collectionView.bounds.size.width);
+    NSLog(@"self.itemInsets.left =%f",self.itemInsets.left);
+    NSLog(@"self.itemInsets.right =%f",self.itemInsets.right);
+    NSLog(@"self.numberOfColumns=%ld",(long)self.numberOfColumns);
+    NSLog(@"self.itemSize.width=%f",cellWidth);
+    */
     
     CGFloat spacingX =  self.collectionView.bounds.size.width -
                         self.itemInsets.left -
                         self.itemInsets.right -
-                        (self.numberOfColumns * self.itemSize.width);
+                        (self.numberOfColumns * cellWidth);
     
     if (self.numberOfColumns > 1)
         spacingX = spacingX / (self.numberOfColumns - 1);
     
-    CGFloat originX = floorf(self.itemInsets.left + (self.itemSize.width + spacingX) * column);
+    CGFloat originX = floorf(self.itemInsets.left + (cellWidth + spacingX) * column);
 
     
     CGFloat originY = floor(self.itemInsets.top +(self.itemSize.height + self.interItemSpacingY) * row);
 
     
-    return CGRectMake(originX, originY, self.itemSize.width, self.itemSize.height);
+    return CGRectMake(originX, originY, cellWidth, self.itemSize.height);
 }
 
 @end
