@@ -81,15 +81,14 @@
     //get saved information from DB
     Database *db =[Database alloc];
     [db getPropertiesFile];
-    NSString *UserID = [db GetPropertyValue:@"UserId"];
-    NSString *UserName = [db GetPropertyValue:@"UserName"];
-    NSString *UserPass = [db GetPropertyValue:@"UserPass"];
-    NSString *MemberId = [db GetPropertyValue:@"MemberId"];
-    NSString *NhId = [db GetPropertyValue:@"NhId"];
+    NSString *UserID    = [db GetPropertyValue:@"UserId"];
+    NSString *UserName  = [db GetPropertyValue:@"UserName"];
+    NSString *UserPass  = [db GetPropertyValue:@"UserPass"];
+    NSString *MemberId  = [db GetPropertyValue:@"MemberId"];
+    NSString *NhId      = [db GetPropertyValue:@"NhId"];
     
     NSString *TblId = [NSString stringWithFormat: @"%ld",TableID];
-    query = [NSString stringWithFormat:@"%@%@", query,
-             UserName];
+    //query = [NSString stringWithFormat:@"%@%@", query,UserName];
     
     NSString *seperator;
     seperator = [NSString stringWithFormat:@"%c",1];
@@ -315,7 +314,41 @@
     
     /** added by shirish for new rows on refresh 11/24/14 **/
     // get new rows
-    NSArray *newRowsArr = [[resParts objectAtIndex:2] componentsSeparatedByString:seperator];
+    NSMutableDictionary *newRowsDict = [[NSMutableDictionary alloc] init];
+    NSArray *newRowsArr = [[NSArray alloc] init];
+    
+    NSRange newRowIdentifier = [[resParts objectAtIndex:2] rangeOfString:@"N"];
+    if (newRowIdentifier.location != NSNotFound)
+    {
+        NSString *prevRowId = @"";
+        NSString *newRowId  = @"";
+        
+        NSArray *RowsArr = [[resParts objectAtIndex:2] componentsSeparatedByString:seperator];
+        
+        for (int rowsArrCnt=0;rowsArrCnt < [RowsArr count];rowsArrCnt++)
+        {
+            newRowId =[RowsArr objectAtIndex:rowsArrCnt];
+            if ([[RowsArr objectAtIndex:rowsArrCnt+1] isEqualToString:@"N"])
+            {
+                if (rowsArrCnt == 0)
+                    [newRowsDict setObject:newRowId forKey:@"-1"];
+                    //[newRowsDict addObject:[NSString stringWithFormat:@"-1:%@", newRowId]];
+                else
+                    [newRowsDict setObject:newRowId forKey:prevRowId];
+                    //[newRowsDict addObject:[NSString stringWithFormat:@"%@:%@",prevRowId,newRowId]];
+                
+            }
+            
+            prevRowId = newRowId;
+            rowsArrCnt+= 1;
+        }
+        //[newRowsArr addObject:newRowsDict];
+        newRowsArr = (NSArray *)newRowsDict;
+        [BWC setNewRows:newRowsArr];
+    }
+    else
+        [BWC setNewRows:nil];
+    
     
     return BWC;
     
@@ -523,6 +556,171 @@
     
     return cub;
     
+}
+
+
+
+-(NSString *)GetBufferAllUpdates:(NSInteger)TableID:(NSString *)View:(NSString *)Period
+{
+    Database *db =[Database alloc];
+    [db getPropertiesFile];
+    NSString *UserID = [db GetPropertyValue:@"UserId"];
+    NSString *MemberId = [db GetPropertyValue:@"MemberId"];
+    NSString *NhId = [db GetPropertyValue:@"NhId"];
+    
+    long long int dblstartdate = 0;
+    long long int dblenddate = 0;
+    long long int localtimeafter = 0;
+    int daysToAdd = 0;
+    
+    
+    //-----set the time period
+    NSDate *now = [NSDate date];
+    NSLog(@"Today: %@", now);
+    
+    if([Period isEqualToString:@"Week"])
+    {
+        daysToAdd = -7;
+    }
+    else if([Period isEqualToString:@"Month"])
+    {
+        daysToAdd = -30;
+    }
+    else if([Period isEqualToString:@"Year"])
+    {
+        daysToAdd = -365;
+    }
+    
+    // set up date components
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setDay:daysToAdd];
+    
+    // create a calendar
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSDate *StartPeriod = [gregorian dateByAddingComponents:components toDate:now options:0];
+    NSLog(@"StartPeriod: %@", StartPeriod);
+    
+    
+    //------start date and end date in mS
+    dblstartdate = ([StartPeriod timeIntervalSince1970]);
+    dblstartdate = dblstartdate * 1000;
+    dblenddate = ([now timeIntervalSince1970]);
+    dblenddate = dblenddate * 1000;
+    localtimeafter = dblenddate;
+    
+    
+    
+    //------------------
+    NSString *TblId = [NSString stringWithFormat: @"%d",(int)TableID];
+    NSString *strtdate = [@(dblstartdate) stringValue];
+    NSString *enddate = [NSString stringWithFormat:@"%lld",dblenddate];
+    NSString *LocalTimeAfter = [NSString stringWithFormat:@"%lld",dblenddate];
+    
+    NSLog(@"dblStartPeriod: %@", strtdate);
+    NSLog(@"dblEndPeriod: %@", enddate);
+    
+    NSString *seperator;
+    seperator = [NSString stringWithFormat:@"%c",1];
+    NSString *buffer = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@-1%@Duration%@%@%@",UserID,seperator,NhId,seperator,View,seperator,TblId,seperator,Period,seperator,strtdate,seperator,enddate,seperator,LocalTimeAfter,seperator,seperator,seperator,MemberId,seperator];
+    NSLog(@"BufferAllUpdates = %@" ,buffer);
+    return buffer;
+    
+}
+
+
+
+
+-(NSArray *)ExtractResponseAllUpdates:(NSString *) ResBuffer
+{
+    NSString *seperator = [NSString stringWithFormat:@"%c",1];
+    NSString *ContentDeLimiter = [NSString stringWithFormat:@"%c",2];
+    
+    NSMutableArray *retArr = [[NSMutableArray alloc]init];
+    
+    
+    NSArray *resParts = [ResBuffer componentsSeparatedByString:ContentDeLimiter];
+    NSString *ResBool = [resParts objectAtIndex:0];
+    NSLog(@"===response bool=>%@===",ResBool);
+    if ([ResBool isEqualToString: @"Success"])
+    {
+        for(int i = 1;i<[resParts count]-1;i++)
+        {
+            NSArray *obj = [[NSArray alloc]init];
+            obj = [[resParts objectAtIndex:i] componentsSeparatedByString:seperator];
+            [retArr addObject:obj];
+        }
+    }
+    
+    return retArr;
+}
+
+
+-(NSString *)GetBufferMissingUpdates:(NSInteger)TableID
+{
+    Database *DB =[Database alloc];
+    [DB getPropertiesFile];
+    
+    NSString *UserID = [DB GetPropertyValue:@"UserId"];
+    NSString *UserName = [DB GetPropertyValue:@"UserName"];
+    NSString *UserPass = [DB GetPropertyValue:@"UserPass"];
+    NSString *MemberId = [DB GetPropertyValue:@"MemberId"];
+    NSString *NhId = [DB GetPropertyValue:@"NhId"];
+    NSString *NhName = [DB GetPropertyValue:@"NhName"];
+    
+    //-----set the time period
+    NSDate *now = [NSDate date];
+    NSLog(@"Today: %@", now);
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/yyyy h:mm:ss a"];
+    
+    NSString *formattedDateString = [NSString stringWithFormat:@"%@ PST",[dateFormatter stringFromDate:now]];
+    
+    //------------------
+    NSString *TblId = [NSString stringWithFormat: @"%d",(int)TableID];
+    NSString *actionId = @"1";
+    NSString *seperator;
+    seperator = [NSString stringWithFormat:@"%c",1];
+    NSString *ContentDelimitter;
+    ContentDelimitter = [NSString stringWithFormat:@"%c",2];
+    
+    NSString *buffer = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@",UserID,seperator,UserName,seperator,UserPass,seperator,MemberId,seperator,NhId,seperator,NhName,seperator,actionId,seperator];
+    
+    //append table info
+    buffer = [NSString stringWithFormat:@"%@%@%@LATEST%@-91578%@-1%@%@%@",buffer,TblId,ContentDelimitter,ContentDelimitter,ContentDelimitter,ContentDelimitter,formattedDateString,ContentDelimitter];
+    
+    buffer = [NSString stringWithFormat:@"%@%@%@",buffer,seperator,seperator];
+    
+    NSLog(@"BufferAllUpdates = %@" ,buffer);
+    return buffer;
+}
+
+-(NSArray *)ExtractResponseMissingUpdates:(NSString *)ResBuffer
+{
+    NSString *seperator = [NSString stringWithFormat:@"%c",1];
+    NSString *ContentDeLimiter = [NSString stringWithFormat:@"%c",2];
+    
+    NSArray *retArr = [[NSArray alloc]init];
+    
+    NSArray *resParts = [ResBuffer componentsSeparatedByString:seperator];
+    
+    if([resParts count] >= 3)
+    {
+        NSString *ResBool = [resParts objectAtIndex:0];
+        NSLog(@"===response bool=>%@===",ResBool);
+        if ([ResBool isEqualToString: @"Success"])
+        {
+            retArr = [[resParts objectAtIndex:1] componentsSeparatedByString:ContentDeLimiter];
+        }
+    }
+    else
+    {
+        resParts = [ResBuffer componentsSeparatedByString:ContentDeLimiter];
+        
+    }
+    
+    return retArr;
 }
 
 

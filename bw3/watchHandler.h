@@ -2,7 +2,7 @@
 //  watchHandler.h
 //  bw3
 //
-//  Created by Sarang Kulkarni on 11/7/14.
+//  Created by Shirish Jaiswal on 11/7/14.
 //  Copyright (c) 2014 Ashish. All rights reserved.
 //
 
@@ -11,6 +11,7 @@
 
 @interface watchHandler : NSObject
 
--(void)loadBenjaminWatch:(MainVC *) mainVCObj;
+-(NSArray *)loadBenjaminWatch;
+-(void)callBenjaminWatch:(MainVC *)mainVCObj :(NSArray *)watchRowArray;
 
 @end

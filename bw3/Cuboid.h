@@ -30,4 +30,8 @@
 -(void)SetTableId:(int)tblID;
 -(int)GetTableId;
 
+/** added by shirish on 11/27/2014 **/
+-(NSArray *)getNewRows;
+/** added by shirish on 11/27/2014 **/
+
 @end

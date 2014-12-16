@@ -20,6 +20,7 @@
 - (IBAction)notes:(id)sender;
 - (IBAction)wtch:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UIView *mainVCView;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnMsgs;
 @property (strong, nonatomic) IBOutlet UIButton *btnNotes;

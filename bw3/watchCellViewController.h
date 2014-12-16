@@ -2,7 +2,7 @@
 //  watchCellViewController.h
 //  collectionViewStudy
 //
-//  Created by Sarang Kulkarni on 11/3/14.
+//  Created by Shirish Jaiswal on 11/3/14.
 //  Copyright (c) 2014 shirish. All rights reserved.
 //
 

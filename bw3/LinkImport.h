@@ -13,6 +13,9 @@
 @interface LinkImport : NSObject
 
 -(Cuboid *)LinkImportApi:(NSInteger*) TableId;
+
+/***** added by shirish for ondemand linkImport API 11/13/14 *****/
 -(Cuboid*)LinkImportApiOnDemand:(NSInteger *)TableId onDemandParam:(NSString *)query;
+/***** added by shirish for ondemand linkImport API 11/13/14 *****/
 
 @end

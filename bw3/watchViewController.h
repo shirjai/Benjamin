@@ -2,7 +2,7 @@
 //  watchViewController.h
 //  collectionViewStudy
 //
-//  Created by Sarang Kulkarni on 10/31/14.
+//  Created by Shirish Jaiswal on 10/31/14.
 //  Copyright (c) 2014 shirish. All rights reserved.
 //
 

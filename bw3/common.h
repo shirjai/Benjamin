@@ -10,6 +10,8 @@
 
 @interface common : NSObject
 
++(NSDictionary *)loadValuesfromPropertiesFile:(NSString *)propertyFileName;
+
 +(CATransition *)getViewTransistionStylePageCurl;
 +(NSString *)getSubstring:(NSString *)stringParam defineStartChar:(NSString *)start defineEndChar:(NSString *)end;
 

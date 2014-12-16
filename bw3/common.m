@@ -13,6 +13,18 @@
 @implementation common
 
 
+// get the values from property File
++(NSDictionary *)loadValuesfromPropertiesFile:(NSString *)propertyFileName{
+    
+    NSString *propertyPath = [[NSBundle mainBundle] pathForResource:propertyFileName ofType:@"plist"];
+    
+    NSDictionary *propDict = [[NSDictionary alloc] initWithContentsOfFile:propertyPath];
+    
+    return propDict;
+    
+}
+
+
 /*available transitions
  
  kCATransitionFade,kCATransitionMoveIn, kCATransitionPush, kCATransitionReveal, @"cameraIris", @"cameraIrisHollowOpen", @"cameraIrisHollowClose", @"cube", @"alignedCube", @"flip", @"alignedFlip", @"oglFlip", @"rotate", @"pageCurl"
@@ -71,7 +83,7 @@
     else{
         NSString *strColName = nil;
         NSString *strColVal = nil;
-        NSNumber *numRowId = nil;
+        NSString *strRowId = nil;
         Row *eachRow = nil;
         int irowCnt = 0;
         
@@ -83,8 +95,9 @@
            // NSLog(@"Rowid:%d",[eachRow RowId]);
             
             NSMutableDictionary *mutdictCubData = [[NSMutableDictionary alloc] init];
-            numRowId = [NSNumber numberWithInt:[eachRow RowId]];
-            [mutdictCubData setObject:numRowId forKey:rowIdColName];
+            //numRowId = [NSNumber numberWithInt:[eachRow RowId]];
+            strRowId = [NSString stringWithFormat:@"%d", [eachRow RowId]];
+            [mutdictCubData setObject:strRowId forKey:rowIdColName];
             
             for (int i=0; i <[[eachRow ColName] count];i++)
             {

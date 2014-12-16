@@ -10,6 +10,7 @@
                 <outlet property="btnMsgs" destination="eqZ-5u-BWW" id="skp-b4-OtH"/>
                 <outlet property="btnNotes" destination="Ae5-tK-H2P" id="KD7-U4-RTp"/>
                 <outlet property="btnWtch" destination="rm0-go-5zY" id="oiC-pP-VXm"/>
+                <outlet property="mainVCView" destination="1" id="ZvP-FW-7rU"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>

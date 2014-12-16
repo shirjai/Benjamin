@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WBDetails.h"
 
 @interface WBclass : NSObject
--(void)getworkbooks;
+-(NSArray*) getworkbooks;
+-(WBDetails*) GetWorkbookDetails:(NSString*) workBookName;
 
 @end

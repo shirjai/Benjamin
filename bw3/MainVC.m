@@ -156,9 +156,12 @@
       watchHandler *watchHandlerObj = [[watchHandler alloc] init];
           
      // send the mainVC obj to the noteshandler to launch notes module
-     [watchHandlerObj loadBenjaminWatch:self];
+     NSArray *watchRowArray = [watchHandlerObj loadBenjaminWatch];
+    
+    // navigate to watch interface
+    [watchHandlerObj callBenjaminWatch:self :watchRowArray];
 }
 
-  
+
 
 @end

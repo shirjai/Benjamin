@@ -17,6 +17,11 @@
     int tx_id;
     //array of row objects
     NSMutableArray *Rows;
+    
+    /** added by shirish on 11/27/2014 **/
+    //array of new row and corresponding previous row
+    NSArray *newRows;
+    /** added by shirish on 11/27/2014 **/
 }
 
 -(void)SetCuboid:(BwCuboid *)BWC
@@ -47,6 +52,11 @@
     
     [Rows addObject:R1];
     }
+    
+    /** added by shirish on 11/27/2014 **/
+    //new row array not required during linkImport
+     newRows = nil;
+    /** added by shirish on 11/27/2014 **/
 }
 
 
@@ -90,6 +100,10 @@
     [Rows addObject:R1];
     }
     
+    /** added by shirish on 11/27/2014 **/
+    //array of new row and corresponding previous row
+    newRows = [BWC getNewRows];
+    /** added by shirish on 11/27/2014 **/
 }
 
 
@@ -148,5 +162,10 @@
     return  TableId;
 }
 
+/** added by shirish on 11/27/2014 **/
+-(NSArray *)getNewRows{
+    return newRows;
+}
+/** added by shirish on 11/27/2014 **/
 
 @end

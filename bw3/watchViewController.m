@@ -1,8 +1,8 @@
-//
+    //
 //  watchViewController.m
 //  collectionViewStudy
 //
-//  Created by Sarang Kulkarni on 10/31/14.
+//  Created by Shirish Jaiswal on 10/31/14.
 //  Copyright (c) 2014 shirish. All rights reserved.
 //
 
@@ -12,11 +12,13 @@
 #import "watchCellViewController.h"
 
 // import the custom layout
-#import "watchCellViewLayout.h"
+//#import "watchCellViewLayout.h"
 
 #import "LinkImport.h"
 #import "Refresh.h"
 #import "common.h"
+#import "Database.h"
+#import "ExternalQuery.h"
 
 @interface watchViewController ()<UICollectionViewDelegate, UICollectionViewDataSource//>
 ,UICollectionViewDelegateFlowLayout>
@@ -26,7 +28,7 @@
 
 @property (strong, nonatomic) IBOutlet UICollectionView *watchCollectionView;
 
-@property (strong, nonatomic) IBOutlet watchCellViewLayout *cellViewLayout;
+//@property (strong, nonatomic) IBOutlet watchCellViewLayout *cellViewLayout;
 
 
 @end
@@ -60,8 +62,8 @@
     
     [self.watchCollectionView registerClass:[watchCellViewController class] forCellWithReuseIdentifier:@"watchCell"];
     
-    [self.watchCollectionView reloadData];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_bwt.png"]];
+    //[self.watchCollectionView reloadData];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_logo.png"]];
  
    /// self.watchCollectionView.collectionViewLayout = [[watchCellViewLayout alloc] init];
     
@@ -140,95 +142,207 @@
     return cell;
 }
 
+
 -(void)refreshWatch
 {
 
+    NSLog(@"Inside Refresh Watch Tag Value cuboid");
+    
+    //get watch properties
+    NSDictionary *propDict = [common loadValuesfromPropertiesFile:@"watchProperties"];
+    
+    //assign query id
+    NSString *queryId = [propDict objectForKey:@"queryId"];//@"68";
+    //assign tagValue cuboid id
+    int intWatchTagValId = [[propDict objectForKey:@"tableId"] intValue];//2000284;
+    
+    ExternalQuery *extQueryObj = [[ExternalQuery alloc] init];
+    NSString *requestBuffer = [extQueryObj getExternalData :intWatchTagValId :@" " :queryId :@" "];
+    NSArray *response = [extQueryObj ExtractResponseExternalData :requestBuffer];
+    
+    if (response == nil) {
+        NSLog(@"Error in updating Tag Cuboid");
+    }
+    
+    NSLog(@"Refresh Cell Changes");
     Refresh *refreshObj = [[Refresh alloc]init];
-    Cuboid *cubMsg = [[Cuboid alloc] init];
-    int intMsgCuboidId = 2000284 ; //(int)_msgCubId;
-    cubMsg = [refreshObj RefreshAPI:intMsgCuboidId:1];
+    Cuboid *cubWatch = [[Cuboid alloc] init];
     
+    cubWatch = [refreshObj RefreshAPI:intWatchTagValId:1];
     
+    NSString *rowColName        = [propDict objectForKey:@"rowIdKey"];
+    NSString *strTagColName     = [propDict objectForKey:@"tagValCol"];
+    NSString *strValColName     = [propDict objectForKey:@"valCol"];
+    NSString *strTimeColName    = [propDict objectForKey:@"timeStampCol"];
+    NSString *strUserColName    = [propDict objectForKey:@"userColName"];
+    NSString *strCubColName    = [propDict objectForKey:@"cubColName"];
+    NSMutableString *strOnDemandParam = [[propDict objectForKey:@"dynamicQuery"] mutableCopy];     
+    NSArray *arrSelColNames = [NSArray arrayWithObjects: strTagColName, strValColName, strTimeColName, rowColName, nil];
     
-    NSLog(@"Inside Refresh Watch -Tag Value cuboid");
-    
-    if (cubMsg != Nil)
+    if([[cubWatch GetRow] count])
     {
+        NSMutableArray *mutArrCellChnge = [cubWatch GetRow];
+
+        
+        //re-arrange data in watch format and get it in an array
+        mutArrCellChnge = [common prepareDataFromBuffer:mutArrCellChnge ColNames:arrSelColNames RowIdCol:rowColName];
+        
+        // assuming postion for cols as 1:Tag Name;2:Value;3:Timestamp, 4:RowId
+        for(int cellCnt=0; cellCnt < [mutArrCellChnge count]; cellCnt++)
+        {
+            NSDictionary *eachCell = mutArrCellChnge[cellCnt];
+            for(int watchArrCnt=0; watchArrCnt < [watchArray count]; watchArrCnt++)
+            {
+                NSMutableArray *eachRowArr = watchArray[watchArrCnt];
+                if([(NSString *)[eachCell objectForKey:rowColName]isEqualToString:eachRowArr[3]])
+                {
+                    for( NSString *aKey in [eachCell allKeys] )
+                    {
+                        if([aKey isEqualToString:strTagColName])
+                            watchArray[watchArrCnt][0] = (NSString *)[eachCell objectForKey:aKey];
+                        if([aKey isEqualToString:strValColName])
+                            watchArray[watchArrCnt][1] = (NSString *)[eachCell objectForKey:aKey];
+                        if([aKey isEqualToString:strTimeColName])
+                        {
+                            NSString *time = (NSString *)[eachCell objectForKey:aKey];
+                            watchArray[watchArrCnt][2]  = [common dateFromExcelSerialDate:[time doubleValue]];
+                            //watchArray[watchArrCnt][2] = (NSString *)[eachCell objectForKey:aKey];
+                        }
+                        
+                    }
+                }
+                    
+            }
+        }
+        
+    }
+    
+    NSLog(@"Remove absent Rows");
+/** Delete Row Logic to be uncommented when server side code ready**/
+    
+    /*
+    Database *DB = [[Database alloc]init];
+    NSArray *presentRows = [[DB Getcuboid:intMsgCuboidId] GetRowIds];
+    
+    NSMutableArray *watchArrayRowIds = [[NSMutableArray alloc] init];
+        
+    [watchArray enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(NSMutableArray *eachRowArr, NSUInteger idx, BOOL *stop) {
+            //if([eachRowArr[3] isKindOfClass:[NSNumber class]])
+    if(![eachRowArr[3] isEqualToString:@"RowId"])
+        [watchArrayRowIds addObject:eachRowArr[3]];
+    }];
+        
+    [watchArrayRowIds removeObjectsInArray:presentRows];
+        
+    if([watchArrayRowIds count])
+    {
+        for(int i=0; i < [watchArray count]; i++)
+        {
+            NSMutableArray *eachRowArr = watchArray[i];
+            if([watchArrayRowIds containsObject:eachRowArr[3]])
+                [watchArray removeObjectAtIndex:i];
+        }
+    } */
+
+
+    NSLog(@"Refresh New Rows");
+    NSDictionary *newRows = (NSDictionary *)[cubWatch getNewRows] ;
+    
+    if ([newRows count])
+    {
+        
         NSLog(@"Data returned from server");
         
-        NSMutableArray *mutarrNewRows =[cubMsg GetRow];
-        //NSMutableArray *cubmsgs = [[NSMutableArray alloc] init];
         
-        NSArray *arrSelColNames = [NSArray arrayWithObjects: @"Tag Name", @"Value", @"Timestamp", nil];
+        NSMutableArray *mutarrNewRows =[cubWatch GetRow];
+        //NSMutableArray *cubmsgs = [[NSMutableArray alloc] init];
         
         //re-arrange data in watch format and get it in an array
         mutarrNewRows = [common prepareDataFromBuffer:mutarrNewRows ColNames:arrSelColNames RowIdCol:@"RowId"];
-
-        NSMutableArray *watchRowArray = [[NSMutableArray alloc]init];
         
-        // add data
-        
+        // add data        
         NSPredicate *predicate = nil;
         NSString *col1 = nil;
         NSString *col2 = nil;
         NSString *col3 = nil;
+        NSString *strRowId = nil;
         
         for(NSMutableDictionary *mutdictRow in mutarrNewRows)
         {
             NSMutableArray *arrRow = [[NSMutableArray alloc] init];
             for (NSString *key in mutdictRow)
             {
-                predicate = [NSPredicate predicateWithFormat:@"(%@ == %@)", @"Tag Name", key];
+                predicate = [NSPredicate predicateWithFormat:@"(%@ == %@)", strTagColName, key];
                 if([predicate evaluateWithObject:mutdictRow])
                     col1 = [mutdictRow valueForKey:key];
                 
-                predicate = [NSPredicate predicateWithFormat:@"(%@ == %@)", @"Value", key];
+                predicate = [NSPredicate predicateWithFormat:@"(%@ == %@)", strValColName, key];
                 if([predicate evaluateWithObject:mutdictRow])
                     col2 = [mutdictRow valueForKey:key];
                 
-                predicate = [NSPredicate predicateWithFormat:@"(%@ == %@)", @"Timestamp", key];
+                predicate = [NSPredicate predicateWithFormat:@"(%@ == %@)", strTimeColName, key];
                 if([predicate evaluateWithObject:mutdictRow])
                 {
                     col3 = [mutdictRow valueForKey:key];
                     col3 = [common dateFromExcelSerialDate:[col3 doubleValue]];
                 }
+                
+                predicate = [NSPredicate predicateWithFormat:@"(%@ == %@)", rowColName, key];
+                if([predicate evaluateWithObject:mutdictRow])
+                    strRowId = [mutdictRow valueForKey:key];
+                
             }
             
             [arrRow addObject:col1];
             [arrRow addObject:col2];
             [arrRow addObject:col3];
-            [watchRowArray addObject:arrRow];
+            [arrRow addObject:strRowId];
+            
+            
+           [newRows enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL* stop) {
+               
+               NSLog(@"%@ => %@", key, value);
+               NSString *prevRowId = (NSString *)key;
+               NSString *newRowId = (NSString *)value;
+               
+               if([newRowId isEqualToString:[NSString stringWithFormat:@"%@",arrRow[3]]])
+                {
+                    Boolean exit = 0;
+                    for(NSArray *eachRow in watchArray)
+                    {
+                        if([prevRowId isEqualToString:@"-1"])
+                        {
+                            int prevRowIndex = [watchArray indexOfObject:eachRow];
+                            [watchArray insertObject:arrRow atIndex:prevRowIndex +1];
+                            exit = 1;
+                        }
+                        if([[NSString stringWithFormat:@"%@",eachRow[3]]isEqualToString:prevRowId])
+                        {
+                            int prevRowIndex = [watchArray indexOfObject:eachRow];
+                            [watchArray insertObject:arrRow atIndex:prevRowIndex +1];
+                            exit = 1;
+                            
+                        }
+                        if(exit == 1)
+                            break;
+                    }
+                }
+               
+               
+            }];
+            
         }
-    
-        if ([watchRowArray count])
-        {
-            [watchArray addObjectsFromArray:watchRowArray];
-            
-     /*       NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-            NSIndexPath *indexPath = [[NSIndexPath alloc]init];
-            
-            for (int i=0; i<[watchRowArray count]; i++) {
-                indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-                [indexPaths addObject:indexPath];
-            }
-            
-
-            [self   beginUpdates];
-            [self.watchCollectionView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationRight];
-            [self.watchCollectionView endUpdates]; */
-            
-        }
-        else{
-            NSLog(@"No changes from the cloud");
-        }
-        [self.watchCollectionView reloadData];
-        [refreshControlObj endRefreshing];
+        
+        
         
     }
     else{
-        NSLog(@"Error in refreshing Tag Value Watch cuboid");
+        NSLog(@"No changes from the cloud");
     }
-    
+    [self.watchCollectionView reloadData];
+    NSLog(@"Reload Data Done");
+    [refreshControlObj endRefreshing];
+    NSLog(@"Refresh Ends");
 }
 
 #pragma mark – UICollectionViewDelegateFlowLayout

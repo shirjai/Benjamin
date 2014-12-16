@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -38,22 +38,22 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="User Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="131">
-                            <rect key="frame" x="75" y="183" width="171" height="30"/>
+                            <rect key="frame" x="56" y="183" width="208" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="171" id="136"/>
+                                <constraint firstAttribute="width" constant="208" id="260"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="144">
-                            <rect key="frame" x="75" y="248" width="171" height="30"/>
+                            <rect key="frame" x="56" y="248" width="208" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="151">
-                            <rect key="frame" x="136" y="409" width="48" height="31"/>
+                            <rect key="frame" x="124" y="409" width="48" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="31" id="159"/>
@@ -76,6 +76,20 @@
                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="240">
+                            <rect key="frame" x="275" y="10" width="37" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="37" id="248"/>
+                                <constraint firstAttribute="height" constant="33" id="249"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="system_preferences.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="AddServersetting:" destination="-1" eventType="touchUpInside" id="250"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.38381061719999998" green="0.75175858289999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -83,15 +97,17 @@
                         <constraint firstItem="122" firstAttribute="centerX" secondItem="105" secondAttribute="centerX" id="123"/>
                         <constraint firstItem="122" firstAttribute="top" secondItem="96" secondAttribute="top" constant="120" id="125"/>
                         <constraint firstItem="131" firstAttribute="top" secondItem="96" secondAttribute="top" constant="183" id="141"/>
-                        <constraint firstItem="131" firstAttribute="centerX" secondItem="122" secondAttribute="centerX" id="142"/>
                         <constraint firstItem="144" firstAttribute="top" secondItem="96" secondAttribute="top" constant="248" id="148"/>
-                        <constraint firstItem="144" firstAttribute="leading" secondItem="131" secondAttribute="leading" id="149"/>
-                        <constraint firstItem="144" firstAttribute="trailing" secondItem="131" secondAttribute="trailing" id="150"/>
-                        <constraint firstItem="151" firstAttribute="centerX" secondItem="96" secondAttribute="centerX" id="153"/>
-                        <constraint firstItem="151" firstAttribute="centerX" secondItem="144" secondAttribute="centerX" id="154"/>
                         <constraint firstAttribute="bottom" secondItem="151" secondAttribute="bottom" constant="128" id="158"/>
-                        <constraint firstItem="164" firstAttribute="leading" secondItem="144" secondAttribute="leading" id="167"/>
                         <constraint firstAttribute="bottom" secondItem="164" secondAttribute="bottom" constant="162" id="177"/>
+                        <constraint firstAttribute="trailing" secondItem="240" secondAttribute="trailing" constant="8" id="243"/>
+                        <constraint firstItem="240" firstAttribute="top" secondItem="105" secondAttribute="top" id="244"/>
+                        <constraint firstItem="151" firstAttribute="leading" secondItem="96" secondAttribute="leading" constant="124" id="256"/>
+                        <constraint firstItem="144" firstAttribute="leading" secondItem="131" secondAttribute="leading" id="257"/>
+                        <constraint firstItem="164" firstAttribute="leading" secondItem="96" secondAttribute="leading" constant="75" id="259"/>
+                        <constraint firstItem="131" firstAttribute="centerX" secondItem="122" secondAttribute="centerX" id="261"/>
+                        <constraint firstItem="105" firstAttribute="centerX" secondItem="96" secondAttribute="centerX" id="262"/>
+                        <constraint firstItem="144" firstAttribute="trailing" secondItem="131" secondAttribute="trailing" id="264"/>
                     </constraints>
                 </view>
             </subviews>
@@ -108,5 +124,6 @@
     </objects>
     <resources>
         <image name="Resized-86D1I.png" width="57" height="57"/>
+        <image name="system_preferences.png" width="128" height="128"/>
     </resources>
 </document>
