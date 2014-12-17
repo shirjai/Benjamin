@@ -40,6 +40,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+    NSLog(@"Inside initWithNibName");
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Watch";
@@ -51,7 +52,7 @@
 
 - (void)viewDidLoad
 {
-    
+    NSLog(@"Inside viewDidLoad");
   //  [self.watchCollectionView setCollectionViewLayout:[[watchCellViewLayout alloc]init]];
     
     [super viewDidLoad];
@@ -79,6 +80,8 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    NSLog(@"Inside viewWillAppear");
     [super viewWillAppear:animated];
 	
     [[self navigationController] setNavigationBarHidden:NO animated:NO];

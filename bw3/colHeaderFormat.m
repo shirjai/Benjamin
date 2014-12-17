@@ -2,7 +2,7 @@
 //  colHeaderFormat.m
 //  bw3
 //
-//  Created by Sarang Kulkarni on 11/18/14.
+//  Created by Shirish Jaiswal on 11/18/14.
 //  Copyright (c) 2014 Ashish. All rights reserved.
 //
 

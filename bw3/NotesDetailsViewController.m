@@ -38,8 +38,11 @@
 
 - (void)loadView {
     [super loadView];
-    self.notesDetailTextView = [[notesDetail alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:notesDetailTextView];
+    
+    /** uncomment for ios6**/
+   // self.notesDetailTextView = [[notesDetail alloc] initWithFrame:self.view.bounds];
+   // [self.view addSubview:notesDetailTextView];
+     /** uncomment for ios6**/
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
