@@ -10,4 +10,6 @@
 
 @interface notesDetail : UITextView
 
+@property(nonatomic, readonly) NSLayoutManager *layoutManager;
+
 @end

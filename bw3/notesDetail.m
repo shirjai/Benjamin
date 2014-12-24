@@ -10,6 +10,7 @@
 
 @implementation notesDetail
 
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -25,6 +26,8 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
+
+    
     //Get the current drawing context
     CGContextRef context = UIGraphicsGetCurrentContext();
     //Set the line color and width

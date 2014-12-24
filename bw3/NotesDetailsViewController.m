@@ -15,14 +15,18 @@
 
 @property (nonatomic, strong) NSString* notesText;
 
+
+
 @end
 
 @implementation NotesDetailsViewController
 
 
-
 //@synthesize notesScrollView;
-@synthesize notesDetailTextView,notesDetailArray,notesDetailDict,notesText;
+@synthesize notesDetailTextView,notesDetailArray,notesDetailDict,notesText,notesScrollView;
+NSTimer *caretVisibilityTimer = nil;
+CGRect oldRect ;
+CGRect cursorRect;
 
 #pragma mark - tableview delegate
 
@@ -55,14 +59,17 @@
     // Do any additional setup after loading the view from its nib.
     notesDetailTextView.delegate = self;
     
-    //notesScrollView.contentSize = self.view.frame.size;
+    notesScrollView.contentSize = self.view.frame.size;
 
     
     //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelEditNotes:)];
    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveNotes:)];
     self.navigationItem.rightBarButtonItem.enabled = NO;
+    self.notesDetailTextView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
+    self.notesDetailTextView.layoutManager.allowsNonContiguousLayout = NO;    //ios7 bug fix
     [self registerForKeyboardNotifications];
+    
 
 }
 
@@ -86,7 +93,9 @@
     //set the title for the detailed text view with size limited till first new line character
     NSString *note = [common getSubstring:notesDetailTextView.text defineStartChar:@"" defineEndChar:@"\n"];
     self.navigationItem.title = note;
-        
+    
+   
+    
 
 }
 
@@ -108,6 +117,7 @@
 - (void)textViewDidChangeSelection:(UITextView *)textView{
     
      NSLog(@"Inside textViewDidChangeSelection");
+   
     
 }
 
@@ -123,14 +133,76 @@
     
 } */
 
+/*
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    oldRect  = [self.notesDetailTextView caretRectForPosition:self.notesDetailTextView.selectedTextRange.end];
+    
+    
+    caretVisibilityTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(scrollCaretToVisible) userInfo:nil repeats:YES];
+    
+    
+}
+
+*/
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [caretVisibilityTimer invalidate];
+    caretVisibilityTimer = nil;
+}
+
+/*
+- (void)scrollCaretToVisible
+{
+    //This is where the cursor is at.
+    CGRect caretRect = [self.notesDetailTextView caretRectForPosition:self.notesDetailTextView.selectedTextRange.end];
+    
+    
+    // Convert into the correct coordinate system
+    caretRect = [self.view convertRect:caretRect fromView:self.notesDetailTextView];
+    
+    // get the keyboard start position
+    if(CGRectEqualToRect(caretRect, oldRect))
+        return;
+    
+    oldRect = caretRect;
+    
+    // get the keyboard start position
+    
+    //This is the visible rect of the textview.
+    CGRect visibleRect = self.notesDetailTextView.bounds;
+    
+    visibleRect.size.height -= (self.notesDetailTextView.contentInset.top + self.notesDetailTextView.contentInset.bottom);
+    
+    visibleRect.origin.y = self.notesDetailTextView.contentOffset.y;
+    
+    //We will scroll only if the caret falls outside of the visible rect.
+     if(!CGRectContainsRect(visibleRect, caretRect))
+     {
+    // Work out how much the scroll position would have to change by to make the cursor visible
+    CGFloat diff = (caretRect.origin.y + caretRect.size.height) - (visibleRect.origin.y + visibleRect.size.height);
+    
+    // If diff < 0 then this isn't to do with the iOS7 bug, so ignore
+         if (diff > 0) {
+        // Scroll just enough to bring the cursor back into view
+             CGPoint newOffset = self.notesDetailTextView.contentOffset;
+             newOffset.y += diff;
+             [self.notesDetailTextView setContentOffset:newOffset animated:NO];
+         }
+    }
+}
+*/
+
+
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
     
-    NSLog(@"Inside textviewediting");
+    NSLog(@"Inside textViewShouldBeginEditing");
     notesText = notesDetailTextView.text;
     self.navigationItem.rightBarButtonItem.enabled = YES;
     //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(saveNotes:)];
     return YES;
 }
+
 
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
     
@@ -138,9 +210,29 @@
     
 }
 
--(void)textViewDidChange:(NSNotification *)notification{
+
+
+// to fix the bug while editing the last line behing the keyboard doesnt show up.
+- (void)textViewDidChange:(UITextView *)textView {
+    NSLog(@"Inside TextViewDidChange");
     
+    CGRect line = [textView caretRectForPosition:textView.selectedTextRange.start];
+    CGFloat overflow = line.origin.y + line.size.height
+    - ( textView.contentOffset.y + textView.bounds.size.height
+       - textView.contentInset.bottom - textView.contentInset.top );
+    if ( overflow > 0 ) {
+        // We are at the bottom of the visible text and introduced a line feed, scroll down (iOS 7 does not do it)
+        // Scroll caret to visible area
+        CGPoint offset = textView.contentOffset;
+        offset.y += overflow + 7; // leave 7 pixels margin
+        // Cannot animate with setContentOffset:animated: or caret will not appear
+        [UIView animateWithDuration:.2 animations:^{
+            [textView setContentOffset:offset];
+        }];
+    }
 }
+
+
 
 -(void)viewDidLayoutSubviews{
    [super viewDidLayoutSubviews];
@@ -158,23 +250,37 @@
 -(void) keyboardDidShow: (NSNotification *)notif{
 
     //get keyboard size
+    
+  // uncomment for ios6
     NSDictionary *info = [notif userInfo];
-    NSValue *value  = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];//UIKeyboardFrameEndUserInfoKey
+    NSValue *value  = [info objectForKey:UIKeyboardFrameEndUserInfoKey];// UIKeyboardFrameEndUserInfoKey - ios6
     CGSize keyboardSize = [value CGRectValue].size;
     
-    
-    CGRect viewFrame = self.view.frame;
-	viewFrame.size.height -= (keyboardSize.height);
-    
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-    notesDetailTextView.contentInset = contentInsets;
-    notesDetailTextView.scrollIndicatorInsets = contentInsets;
+    //UIEdgeInsets contentInsets =   self.notesDetailTextView.contentInset;
+    //contentInsets.bottom += [notif.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+    
+    // If active text is hidden by keyboard, scroll it so it's visible
+    CGRect viewFrame = self.view.frame;
+	viewFrame.size.height -= (keyboardSize.height) + (self.navigationController.navigationBar.frame.size.height);
+        
+    cursorRect = [notesDetailTextView caretRectForPosition:notesDetailTextView.selectedTextRange.end];
+    
+    if (!CGRectContainsPoint(viewFrame, cursorRect.origin)) {
+        notesScrollView.contentInset = contentInsets;
+        notesScrollView.scrollIndicatorInsets = contentInsets;
+        
+    }
+    else{
+        notesDetailTextView.contentInset = contentInsets;
+        notesDetailTextView.scrollIndicatorInsets = contentInsets;
+    }
 
     
-  /*  //resize the scroll view
-    if (!CGRectContainsPoint(viewFrame, notesDetailTextView.frame.origin)) {
-        [self.notesDetailTextView scrollRectToVisible:notesDetailTextView.frame animated:YES];
-    } */
+    //resize the scroll view
+    if (!CGRectContainsPoint(viewFrame, cursorRect.origin)) {
+        [notesScrollView scrollRectToVisible:cursorRect animated:YES];
+    }
     
 	//notesScrollView.frame = viewFrame;
     //notesDetailTextView.frame = viewFrame;
@@ -185,22 +291,38 @@
 
 -(void) keyboardDidHide: (NSNotification *)notif{
     
+
 	NSDictionary* info = [notif userInfo];
 	NSValue* aValue = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
 	CGSize keyboardSize = [aValue CGRectValue].size;
-    
+/*
 	CGRect viewFrame = self.view.frame;
-	viewFrame.size.height += keyboardSize.height;
+	viewFrame.size.height += keyboardSize.height; */
     
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
-    notesDetailTextView.contentInset = contentInsets;
-    notesDetailTextView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect viewFrame = self.view.frame;
+	viewFrame.size.height -= (keyboardSize.height) + (self.navigationController.navigationBar.frame.size.height);
+    
+    
+    if (!CGRectContainsPoint(viewFrame, cursorRect.origin)) {
+        notesScrollView.contentInset = contentInsets;
+        notesScrollView.scrollIndicatorInsets = contentInsets;
+        
+    }
+    else{
+        notesDetailTextView.contentInset = contentInsets;
+        notesDetailTextView.scrollIndicatorInsets = contentInsets;
+    }
+    //notesScrollView.contentInset = contentInsets;
+    //notesScrollView.scrollIndicatorInsets = contentInsets;
+ 
     
    //resize the scroll view
-    if (!CGRectContainsPoint(viewFrame, notesDetailTextView.frame.origin)) {
-        [self.notesDetailTextView scrollRectToVisible:notesDetailTextView.frame animated:YES];
-    }
-    
+     if (!CGRectContainsPoint(viewFrame, cursorRect.origin)) {
+         [notesScrollView scrollRectToVisible:viewFrame animated:YES];
+     }
+ 
 	//notesScrollView.frame = viewFrame;
    // notesDetailTextView.frame = viewFrame;
     	
@@ -208,8 +330,16 @@
 		//NSLog(@"Keyboard is already hidden. Ignoring notification.");
 	//	return;
 	//}
+
+    
     
 }
+
+
+
+
+
+
 
 #pragma mark - Benjamin custom methods
 

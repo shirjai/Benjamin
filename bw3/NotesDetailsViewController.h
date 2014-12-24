@@ -12,14 +12,14 @@
 @interface NotesDetailsViewController : UIViewController{
     
     
-   // IBOutlet UIScrollView *notesScrollView;
+    IBOutlet UIScrollView *notesScrollView;
     //IBOutlet UITextView *notesDetailTextView;
     IBOutlet notesDetail *notesDetailTextView;
     
 }
 
 @property (nonatomic,strong) notesDetail *notesDetailTextView;
-//@property(nonatomic, strong) UIScrollView *notesScrollView;
+@property(nonatomic, strong) UIScrollView *notesScrollView;
 //@property(nonatomic, strong) UITextView *notesDetailTextView;
 @property(nonatomic, strong) NSMutableArray *notesDetailArray;
 @property(nonatomic, strong) NSDictionary *notesDetailDict;
