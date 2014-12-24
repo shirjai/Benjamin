@@ -308,6 +308,8 @@ CGRect cursorRect;
     if (!CGRectContainsPoint(viewFrame, cursorRect.origin)) {
         notesScrollView.contentInset = contentInsets;
         notesScrollView.scrollIndicatorInsets = contentInsets;
+        //notesScrollView.contentSize = CGSizeMake(320, 480);
+        notesScrollView.frame = CGRectMake(0, 0, 320, 480);
         
     }
     else{
@@ -319,9 +321,9 @@ CGRect cursorRect;
  
     
    //resize the scroll view
-     if (!CGRectContainsPoint(viewFrame, cursorRect.origin)) {
-         [notesScrollView scrollRectToVisible:viewFrame animated:YES];
-     }
+   //  if (!CGRectContainsPoint(viewFrame, cursorRect.origin)) {
+   //      [notesScrollView scrollRectToVisible:viewFrame animated:YES];
+   //  }
  
 	//notesScrollView.frame = viewFrame;
    // notesDetailTextView.frame = viewFrame;
