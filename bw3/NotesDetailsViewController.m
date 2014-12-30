@@ -23,7 +23,7 @@
 
 
 //@synthesize notesScrollView;
-@synthesize notesDetailTextView,notesDetailArray,notesDetailDict,notesText,notesScrollView;
+@synthesize notesDetailTextView,notesDetailArray,notesDetailDict,notesText;
 NSTimer *caretVisibilityTimer = nil;
 CGRect oldRect ;
 CGRect cursorRect;
@@ -59,7 +59,7 @@ CGRect cursorRect;
     // Do any additional setup after loading the view from its nib.
     notesDetailTextView.delegate = self;
     
-    notesScrollView.contentSize = self.view.frame.size;
+  //  notesScrollView.contentSize = self.view.frame.size;
 
     
     //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelEditNotes:)];
@@ -145,11 +145,12 @@ CGRect cursorRect;
 }
 
 */
+/*
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     [caretVisibilityTimer invalidate];
     caretVisibilityTimer = nil;
-}
+}*/
 
 /*
 - (void)scrollCaretToVisible
@@ -218,8 +219,12 @@ CGRect cursorRect;
     
     CGRect line = [textView caretRectForPosition:textView.selectedTextRange.start];
     CGFloat overflow = line.origin.y + line.size.height
-    - ( textView.contentOffset.y + textView.bounds.size.height
-       - textView.contentInset.bottom - textView.contentInset.top );
+                    - (
+                        textView.contentOffset.y
+                       + textView.bounds.size.height
+                       - textView.contentInset.bottom
+                       //- textView.contentInset.top
+                       );
     if ( overflow > 0 ) {
         // We are at the bottom of the visible text and introduced a line feed, scroll down (iOS 7 does not do it)
         // Scroll caret to visible area
@@ -251,40 +256,47 @@ CGRect cursorRect;
 
     //get keyboard size
     
-  // uncomment for ios6
     NSDictionary *info = [notif userInfo];
     NSValue *value  = [info objectForKey:UIKeyboardFrameEndUserInfoKey];// UIKeyboardFrameEndUserInfoKey - ios6
     CGSize keyboardSize = [value CGRectValue].size;
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(notesDetailTextView.contentInset.top, 0.0, keyboardSize.height, 0.0);
     //UIEdgeInsets contentInsets =   self.notesDetailTextView.contentInset;
     //contentInsets.bottom += [notif.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
     
     // If active text is hidden by keyboard, scroll it so it's visible
     CGRect viewFrame = self.view.frame;
-	viewFrame.size.height -= (keyboardSize.height) + (self.navigationController.navigationBar.frame.size.height);
-        
+	viewFrame.size.height -= (keyboardSize.height) + notesDetailTextView.contentInset.top + 10;
+    //+ (self.navigationController.navigationBar.frame.size.height)
+    
     cursorRect = [notesDetailTextView caretRectForPosition:notesDetailTextView.selectedTextRange.end];
     
-    if (!CGRectContainsPoint(viewFrame, cursorRect.origin)) {
-        notesScrollView.contentInset = contentInsets;
-        notesScrollView.scrollIndicatorInsets = contentInsets;
-        
-    }
-    else{
-        notesDetailTextView.contentInset = contentInsets;
-        notesDetailTextView.scrollIndicatorInsets = contentInsets;
-    }
-
+    notesDetailTextView.contentInset = contentInsets;
+    notesDetailTextView.scrollIndicatorInsets = contentInsets;
     
     //resize the scroll view
     if (!CGRectContainsPoint(viewFrame, cursorRect.origin)) {
-        [notesScrollView scrollRectToVisible:cursorRect animated:YES];
+        //[notesDetailTextView scrollRectToVisible:cursorRect animated:YES];
+        
+        CGRect line = [notesDetailTextView caretRectForPosition:notesDetailTextView.selectedTextRange.start];
+        CGFloat overflow = line.origin.y + line.size.height
+                         - ( notesDetailTextView.contentOffset.y
+                            + notesDetailTextView.bounds.size.height
+                            - notesDetailTextView.contentInset.bottom
+                            //- notesDetailTextView.contentInset.top
+                            );
+        if ( overflow > 0 ) {
+            // Scroll caret to visible area
+            CGPoint offset = notesDetailTextView.contentOffset;
+            offset.y += overflow ;//+ 7; // leave 7 pixels margin
+            // Cannot animate with setContentOffset:animated: or caret will not appear
+            [UIView animateWithDuration:.2 animations:^{
+                [notesDetailTextView setContentOffset:offset];
+            }];
+        }
     }
-    
-	//notesScrollView.frame = viewFrame;
-    //notesDetailTextView.frame = viewFrame;
-    
+
+
 
 }
 
@@ -299,23 +311,13 @@ CGRect cursorRect;
 	CGRect viewFrame = self.view.frame;
 	viewFrame.size.height += keyboardSize.height; */
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(notesDetailTextView.contentInset.top, 0.0, 0.0, 0.0);
     
-    CGRect viewFrame = self.view.frame;
-	viewFrame.size.height -= (keyboardSize.height) + (self.navigationController.navigationBar.frame.size.height);
+
+    notesDetailTextView.contentInset = contentInsets;
+    notesDetailTextView.scrollIndicatorInsets = contentInsets;
+
     
-    
-    if (!CGRectContainsPoint(viewFrame, cursorRect.origin)) {
-        notesScrollView.contentInset = contentInsets;
-        notesScrollView.scrollIndicatorInsets = contentInsets;
-        //notesScrollView.contentSize = CGSizeMake(320, 480);
-        notesScrollView.frame = CGRectMake(0, 0, 320, 480);
-        
-    }
-    else{
-        notesDetailTextView.contentInset = contentInsets;
-        notesDetailTextView.scrollIndicatorInsets = contentInsets;
-    }
     //notesScrollView.contentInset = contentInsets;
     //notesScrollView.scrollIndicatorInsets = contentInsets;
  
@@ -325,8 +327,7 @@ CGRect cursorRect;
    //      [notesScrollView scrollRectToVisible:viewFrame animated:YES];
    //  }
  
-	//notesScrollView.frame = viewFrame;
-   // notesDetailTextView.frame = viewFrame;
+
     	
 	//if (!keyboardVisible) {
 		//NSLog(@"Keyboard is already hidden. Ignoring notification.");

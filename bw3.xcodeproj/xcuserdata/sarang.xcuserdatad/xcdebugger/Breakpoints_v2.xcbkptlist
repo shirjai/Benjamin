@@ -1658,7 +1658,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441543793.163377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "83"
@@ -1770,11 +1770,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441122634.590443"
+            timestampString = "441625983.258742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "400"
-            endingLineNumber = "400"
+            startingLineNumber = "401"
+            endingLineNumber = "401"
             landmarkName = "-saveAddedNotes"
             landmarkType = "5">
          </BreakpointContent>
@@ -1802,7 +1802,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441543793.163377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
@@ -1818,44 +1818,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441122634.590443"
+            timestampString = "441625983.258742"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
+            landmarkName = "-saveNotes:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bw3/NotesDetailsViewController.m"
+            timestampString = "441625983.258742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "359"
             endingLineNumber = "359"
             landmarkName = "-saveNotes:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441122634.590443"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "358"
-            endingLineNumber = "358"
-            landmarkName = "-saveNotes:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441120875.478451"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
-            landmarkName = "-keyboardDidShow:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1946,11 +1930,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441122634.590443"
+            timestampString = "441625983.258742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
+            startingLineNumber = "397"
+            endingLineNumber = "397"
             landmarkName = "-saveAddedNotes"
             landmarkType = "5">
          </BreakpointContent>
@@ -3958,7 +3942,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesTableViewController.m"
-            timestampString = "440499313.048707"
+            timestampString = "441612512.47485"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "191"
@@ -3974,7 +3958,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441543793.163377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
@@ -3990,7 +3974,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441543793.163377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "91"
@@ -4054,7 +4038,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441543793.163377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "119"
@@ -4070,11 +4054,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441546711.67454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "-textViewShouldBeginEditing:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4086,11 +4070,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441120875.478451"
+            timestampString = "441625983.258742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
             landmarkName = "-keyboardDidShow:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4128,7 +4112,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441543793.163377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "72"
@@ -4144,7 +4128,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441543793.163377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "74"
@@ -4160,7 +4144,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441543793.163377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "98"
@@ -4176,7 +4160,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441543793.163377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
@@ -4192,11 +4176,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441546711.67454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "@implementation NotesDetailsViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -4208,11 +4192,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441546711.67454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "@implementation NotesDetailsViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -4224,11 +4208,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441546711.67454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "-textViewDidChange:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4240,7 +4224,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441543793.163377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "139"
@@ -4256,11 +4240,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441546711.67454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "@implementation NotesDetailsViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -4272,11 +4256,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441120875.478451"
+            timestampString = "441625983.258742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
             landmarkName = "-keyboardDidShow:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4288,7 +4272,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441625983.258742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "269"
@@ -4304,28 +4288,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441114971.994806"
+            timestampString = "441625983.258742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "-keyboardDidShow:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441120875.478451"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
-            landmarkName = "-keyboardDidHide:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4336,11 +4304,105 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesDetailsViewController.m"
-            timestampString = "441117477.485022"
+            timestampString = "441525563.010212"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bw3/NotesDetailsViewController.m"
+            timestampString = "441625983.258742"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
+            landmarkName = "-keyboardDidShow:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bw3/NotesDetailsViewController.m"
+            timestampString = "441625983.258742"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
+            landmarkName = "-keyboardDidShow:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bw3/NotesDetailsViewController.m"
+            timestampString = "441625983.258742"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
+            landmarkName = "-keyboardDidShow:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[NotesDetailsViewController keyboardDidShow:]"
+                  moduleName = "bw3"
+                  urlString = "file:///Users/sarang/Shirish/bw3/bw3/NotesDetailsViewController.m"
+                  timestampString = "441625648.396021"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "289"
+                  endingLineNumber = "289"
+                  offsetFromSymbolStart = "2490">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__46-[NotesDetailsViewController keyboardDidShow:]_block_invoke"
+                  moduleName = "bw3"
+                  urlString = "file:///Users/sarang/Shirish/bw3/bw3/NotesDetailsViewController.m"
+                  timestampString = "441625648.396336"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "289"
+                  endingLineNumber = "289"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bw3/NotesDetailsViewController.m"
+            timestampString = "441625983.258742"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
             landmarkName = "-keyboardDidShow:"
             landmarkType = "5">
          </BreakpointContent>
