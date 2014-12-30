@@ -439,7 +439,9 @@ CGRect cursorRect;
 }
 
 
-
+- (void)dealloc {
+    [notesDetailTextView setDelegate:nil];
+}
 
 	
 

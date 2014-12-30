@@ -3942,11 +3942,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bw3/NotesTableViewController.m"
-            timestampString = "441612512.47485"
+            timestampString = "441630801.053855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>

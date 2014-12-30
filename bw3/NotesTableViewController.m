@@ -43,7 +43,10 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
+    // set the color for font of navigation bar
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:143/255.0 green:156/255.0 blue:26/255.0 alpha:1.0];
+    
+    
     // [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor grayColor]}];
     //[self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:UITextAttributeTextColor]];
 }
@@ -91,7 +94,9 @@
                                  
     }
     cell.textLabel.text = [[self.NotesRootArray objectAtIndex:indexPath.row] objectForKey:valCol];
-                             
+    cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:202/255.0 alpha:1.0];
+    
+
     //NSDateFormatter *DateFormat = [[NSDateFormatter alloc] init];
    // NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
    // [DateFormat setLocale:posix];
