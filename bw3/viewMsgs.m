@@ -28,15 +28,20 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    NSLog(@"Inside heightForRowAtIndexPath : %ld",(long)[indexPath row]);
+   // NSLog(@"Inside heightForRowAtIndexPath : %ld",(long)[indexPath row]);
     
     NSDictionary *rowData = self.msgs[indexPath.row];
     //NSString *cellText = rowData[@"Comment"];
-    int cellHt = [self heightForText:rowData[@"User"]] +
+ /*   int cellHt = [self heightForText:rowData[@"User"]] +
                  [self heightForText:rowData[@"Date"]]+
                  [self heightForText:rowData[@"sheet"]]+
                  [self heightForText:rowData[@"Type"]]+
                  [self heightForText:rowData[@"Comment"]];
+    */
+    
+    int cellHt = [self heightForText:
+                  [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@",
+                   rowData[@"User"],rowData[@"Date"],rowData[@"sheet"],rowData[@"Type"],rowData[@"Comment"]]];
 
     return cellHt;
     
@@ -48,12 +53,12 @@
 
 -(CGFloat)heightForText:(NSString *)text
 {
-    NSInteger MAX_HEIGHT = 2000;
+    NSInteger MAX_HEIGHT = 500;
     UITextView * textView = [[UITextView alloc] initWithFrame: CGRectMake(0, 0, 320, MAX_HEIGHT)];
     textView.text = text;
     textView.font = [UIFont systemFontOfSize:12];
     [textView sizeToFit];
-    NSLog(@"*********** :%f",textView.frame.size.height);
+    //NSLog(@"*********** :%f",textView.frame.size.height);
     return textView.frame.size.height;
 }
 
@@ -74,8 +79,14 @@ static NSString *CellIdentifier = @"CellTableIdentifer";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //something here
+    // font color for title
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
+
+    // color for font of navigation bar
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:204/255.0 alpha:1.0];
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
-    //[self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:85.0/255.0 green:143.0/255.0 blue:220.0/255.0 alpha:1.0]];
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:161/255.0 green:209/255.0 blue:255/255.0 alpha:1.0]];
     
     //self.navigationItem.backBarButtonItem.tintColor = [UIColor redColor];
 
@@ -98,7 +109,7 @@ static NSString *CellIdentifier = @"CellTableIdentifer";
     [self.msgsTableView addSubview:refreshControlObj];
 
     //[self.msgsTableView setBackgroundView:nil];
-    self.msgsTableView.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:220/255.0 alpha:1.0];
+   // self.msgsTableView.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:220/255.0 alpha:1.0];
 
     self.msgsTableView.separatorColor = [UIColor greenColor];
     //self.msgsTableView.separatorStyle =  UITableViewCellSeparatorStyleSingleLineEtched;

@@ -66,6 +66,7 @@
     //[self.watchCollectionView reloadData];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_logo.png"]];
  
+    [self registerForKeyboardNotifications];
    /// self.watchCollectionView.collectionViewLayout = [[watchCellViewLayout alloc] init];
     
     // Configure layout
@@ -145,6 +146,50 @@
     return cell;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  //   watchCellViewController *cell = (watchCellViewController *)[collectionView dequeueReusableCellWithReuseIdentifier:@"watchCell" forIndexPath:indexPath];
+    
+    UICollectionViewFlowLayout *myLayout =
+    [[UICollectionViewFlowLayout alloc]init];
+    
+    myLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    //[self.watchCollectionView  setCollectionViewLayout:myLayout animated:YES];
+}
+
+
+- (void)registerForKeyboardNotifications{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector (keyboardDidHide:)
+												 name: UIKeyboardDidHideNotification object:nil];
+}
+
+-(void) keyboardDidShow: (NSNotification *)notif{
+    
+    //get keyboard size
+    
+    NSDictionary *info = [notif userInfo];
+    NSValue *value  = [info objectForKey:UIKeyboardFrameEndUserInfoKey];// UIKeyboardFrameEndUserInfoKey - ios6
+    CGSize keyboardSize = [value CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+    //UIEdgeInsets contentInsets =   self.notesDetailTextView.contentInset;
+    //contentInsets.bottom += [notif.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+    
+
+    
+    self.watchCollectionView.contentInset = contentInsets;
+    self.watchCollectionView.scrollIndicatorInsets = contentInsets;
+    
+  }
+
+    
+    
+    
+
+
+#pragma mark - BWT methods
 
 -(void)refreshWatch
 {

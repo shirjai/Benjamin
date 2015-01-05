@@ -438,7 +438,7 @@ CGRect cursorRect;
     notesDetailTextView.delegate = self;
 }
 
-
+// fix for crash happening due to scroll
 - (void)dealloc {
     [notesDetailTextView setDelegate:nil];
 }
